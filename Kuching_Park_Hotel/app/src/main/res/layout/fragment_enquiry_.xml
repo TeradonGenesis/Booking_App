@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    tools:context=".Enquiry_Fragment">
+
+
+    <TextView
+        android:id="@+id/textView_enquiryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:text="@string/enquiry_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_firstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/firstName_hint"
+        android:autofillHints="@string/firstName_hint"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:background="@drawable/rounded"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_enquiryTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_lastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/lastName_hint"
+        android:autofillHints="@string/lastName_hint"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:background="@drawable/rounded"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editText_firstName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/phone_hint"
+        android:autofillHints="@string/phone_hint"
+        android:inputType="phone"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:background="@drawable/rounded"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editText_lastName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/email_hint"
+        android:autofillHints="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:background="@drawable/rounded"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editText_contact"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/message_hint"
+        android:autofillHints="@string/message_hint"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:background="@drawable/rounded"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editText_email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView_sendMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/blue"
+        android:text="@string/message_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_message" />
+
+    <ImageButton
+        android:id="@+id/imageButton_sendEnquiry"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:background="@drawable/send"
+        android:src="@drawable/send"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_message" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+

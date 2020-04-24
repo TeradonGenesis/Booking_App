@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Kuching Park Hotel Booking App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enquiry_title">Have a question? Send us a message</string>
+    <string name="message_label">Send the message</string>
+    <string name="firstName_hint">First name</string>
+    <string name="lastName_hint">Last name</string>
+    <string name="phone_hint">Phone</string>
+    <string name="email_hint">Email</string>
+    <string name="message_hint">Your message</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="normal_map">Normal</string>
+    <string name="hybrid_map">Hybrid</string>
+    <string name="satellite_map">Satellite</string>
+    <string name="terrain_map">Terrain</string>
+    <string name="address_title">Address</string>
+    <string name="address_content">Lot 606 Padungan Road, 93100 Kuching, Sarawak</string>
+    <string name="getmap">Go to Google Map</string>
+</resources>
