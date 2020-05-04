@@ -92,6 +92,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         }
                     }
                 }while(data.moveToNext());
+            }else{
+                Log.d("console","No duplicates");
             }
 
             for(int i=0;i<duplicates.size();i++){
