@@ -1,0 +1,9 @@
+If the user already check in, carousel, two slides, checked in and upcoming bookinh. Two slides at all time. View all icon for more than one upcoming
+booking.
+
+Show the number of rooms in checkout page
+
+Stocks availability
+1. Make the date not selectable if there is no stocks
+2. Allow user to choose date but it will says on the detail pricing, 259, 259, N/A, this will disable the book room button. Total pricing will be replaced by 
+Not available.
