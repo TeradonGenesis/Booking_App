@@ -31,7 +31,7 @@ public class Booking_Fragment extends Fragment {
     private RequestQueue requestQueue;
     private ArrayList<Room> rooms = new ArrayList<Room>();
     private MyAdapter myAdapter;
-    private static final String URL_DATA = "http://kuchingparkhotel.com.my/room_api.php";
+    private static final String URL_DATA = "http://192.168.1.5/API/room_api.php";
 
     public Booking_Fragment() {
         // Required empty public constructor
@@ -85,8 +85,14 @@ public class Booking_Fragment extends Fragment {
 
                         JSONObject jo = array.getJSONObject(i);
 
-                        Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getDouble("price"), jo.getString("beds"), jo.getInt("guest"), jo.getString("description"));
-
+                        Room roomItem= Room.Builder.newInstance()
+                                .set_Id(jo.getString("id"))
+                                .setImage_Link(jo.getString("image"))
+                                .setRoom_Name(jo.getString("name"))
+                                .setPrice(jo.getDouble("base_Price"))
+                                .setNo_Beds(jo.getString("category"))
+                                .setNo_Guests(jo.getString("noGuests"))
+                                .build();
                         rooms.add(roomItem);
                     }
 

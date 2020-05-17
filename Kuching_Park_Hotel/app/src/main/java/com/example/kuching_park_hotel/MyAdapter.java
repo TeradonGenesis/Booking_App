@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private String url = "http://kuchingparkhotel.com.my/photo";
+    private String url = "http://192.168.1.5/r2g/files/room_type/image/";
     private ArrayList<Room> roomArrayList;
 
     public MyAdapter(ArrayList<Room> roomArrayList) {
@@ -37,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Room room = roomArrayList.get(position);
         String price_string = String.format("%.2f", room.getPrice());
         String photo = room.getImage_link();
-        String photo_url = url + "/" + photo;
+        String photo_url = url + "/" +  room.getId() + "/" + photo;
         Picasso.get().load(photo_url).into(holder.roomImage);
 
         holder.roomName.setText(room.getRoom_name());
@@ -74,11 +74,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             String image = roomArrayList.get(pos).getImage_link();
             String name = roomArrayList.get(pos).getRoom_name();
             String beds = roomArrayList.get(pos).getNo_beds();
-            int guests = roomArrayList.get(pos).getNo_guests();
+            String guests = roomArrayList.get(pos).getNo_guests();
             Double price = roomArrayList.get(pos).getPrice();
             String description = roomArrayList.get(pos).getDescription();
 
-            String image_url = url + "/" + image;
+            String image_url = url + "/" +  roomArrayList.get(pos).getId() + "/" + image;
 
             Intent intent = new Intent(v.getContext(), Room_Detail_Activity.class);
             Bundle detail_bundle = new Bundle();
@@ -86,7 +86,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             detail_bundle.putString("image", image_url);
             detail_bundle.putString("name", name);
             detail_bundle.putString("beds", beds);
-            detail_bundle.putInt("guests", guests);
+            detail_bundle.putString("guests", guests);
             detail_bundle.putString("description", description);
             detail_bundle.putDouble("price", price);
             intent.putExtras(detail_bundle);

@@ -65,13 +65,13 @@ public class Room_Detail_Activity extends AppCompatActivity {
         String image = room_data.getString("image");
         name = room_data.getString("name");
         String beds = room_data.getString("beds");
-        int guests = room_data.getInt("guests");
+        String guests = room_data.getString("guests");
         String description = room_data.getString("description");
 
         String currency = "RM " + String.format("%.2f", price);
 
         Picasso.get().load(image).into(imageView_room);
-        textView_guests.setText(String.valueOf(guests).concat(" guests"));
+        textView_guests.setText(guests);
         textView_price.setText(currency);
         textView_name.setText(name);
         textView_description.setText(description);
