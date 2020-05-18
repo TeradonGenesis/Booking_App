@@ -34,6 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Room room = roomArrayList.get(position);
         String price_string = String.format("%.2f", room.getPrice());
         String photo = room.getImage_link();

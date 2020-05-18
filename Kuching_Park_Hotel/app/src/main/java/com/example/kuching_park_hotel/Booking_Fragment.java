@@ -92,6 +92,33 @@ public class Booking_Fragment extends Fragment {
                                 .setPrice(jo.getDouble("base_Price"))
                                 .setNo_Beds(jo.getString("category"))
                                 .setNo_Guests(jo.getString("noGuests"))
+
+                                //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
+                                .setEb_discount(jo.getString("early_bird_discount"))
+                                .setEb_duration(jo.getString("early_bird_duration"))
+                                .setStocks(jo.getInt("stocks"))
+                                .setSub_image1(jo.getString("sub_image1"))
+                                .setSub_image2(jo.getString("sub_image1"))
+                                .setT1_pr(jo.getInt("tier1_priority"))
+                                .setT1_price(jo.getDouble("tier1_Price"))
+                                .setT1_from(jo.getString("tier1_date_from"))
+                                .setT1_to(jo.getString("tier1_date_to"))
+                                .setT2_pr(jo.getInt("tier2_priority"))
+                                .setT2_price(jo.getDouble("tier2_Price"))
+                                .setT2_from(jo.getString("tier2_date_from"))
+                                .setT2_to(jo.getString("tier2_date_to"))
+                                .setT3_pr(jo.getInt("tier3_priority"))
+                                .setT3_price(jo.getDouble("tier3_Price"))
+                                .setT3_from(jo.getString("tier3_date_from"))
+                                .setT3_to(jo.getString("tier3_date_to"))
+                                .setT4_pr(jo.getInt("tier4_priority"))
+                                .setT4_price(jo.getDouble("tier4_Price"))
+                                .setT5_pr(jo.getInt("tier5_priority"))
+                                .setT5_price(jo.getDouble("tier5_priority"))
+                                .setT6_pr(jo.getInt("tier6_priority"))
+                                .setT6_price(jo.getDouble("tier6_priority"))
+                                .setT7_pr(jo.getInt("tier7_priority"))
+                                .setT7_price(jo.getDouble("tier7_priority"))
                                 .build();
                         rooms.add(roomItem);
                     }
