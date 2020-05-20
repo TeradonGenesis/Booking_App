@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
     EditText login_email;
     EditText login_password;
     String email_details;
+    Member test_member;
 
     //datebase
     RequestQueue rq;
@@ -58,6 +59,8 @@ public class Login extends AppCompatActivity {
                 email_details = login_email.getText().toString();
 
                 getData();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -67,16 +70,17 @@ public class Login extends AppCompatActivity {
     private void getData()
     {
         rq = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
-        StringRequest sr = new StringRequest(Request.Method.POST, URL, new Response.Listener<JSONObject>() {
+        StringRequest sr = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
 
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 try
                 {
                     Log.d("console","Inside the try");
                     JSONArray res = new JSONArray(response);
                     //add data into the member object
                     //Log.d("TEST", String.valueOf(res));
+
                     for(int i=0;i<res.length();i++){
                         JSONObject jsonObject = res.getJSONObject(i);
 
@@ -90,8 +94,9 @@ public class Login extends AppCompatActivity {
                                 jsonObject.getString("city"),
                                 jsonObject.getInt("mobile"),
                                 jsonObject.getInt("postcode"));
-                        memberArrayList.add(member);
+                        test_member = member;
                     }
+                    Log.d("test_member",test_member.getAddress());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
