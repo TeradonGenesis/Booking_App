@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class Member {
     private String member_no,name,address,email,country,state,city;
     private int mobile,postcode;
-    private ArrayList<Booking_History> booking_history;
 
-    public Member(String member_no, String name, String address, String email, String country, String state, String city, int mobile, int postcode, ArrayList<Booking_History> booking_history) {
+
+    public Member(String member_no, String name, String address, String email, String country, String state, String city, int mobile, int postcode) {
         this.member_no = member_no;
         this.name = name;
         this.address = address;
@@ -22,7 +22,6 @@ public class Member {
         this.city = city;
         this.mobile = mobile;
         this.postcode = postcode;
-        this.booking_history = booking_history;
     }
 
     public String getMember_no() {
@@ -61,7 +60,4 @@ public class Member {
         return postcode;
     }
 
-    public ArrayList<Booking_History> getBooking_history() {
-        return booking_history;
-    }
 }

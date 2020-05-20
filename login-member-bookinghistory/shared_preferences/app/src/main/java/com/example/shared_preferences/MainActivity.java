@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                         BigInteger check_in = new BigInteger(jsonObject.getString("check_in"));
                         BigInteger check_out = new BigInteger(jsonObject.getString("check_out"));
 
-                        Booking booking = new Booking(jsonObject.getInt("booking_id"),
+                        Booking booking = new Booking
+                                (jsonObject.getInt("booking_id"),
                                 jsonObject.getInt("room_id"),
                                 jsonObject.getInt("guest_ref"),
                                 jsonObject.getInt("room_qty"),
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                 (float) jsonObject.getDouble("total"));
                         bookingArrayList.add(booking);
                     }
+
                     //gets data from local database and inserts the data from server online
                     Cursor data = databaseHelper.getBookings();
                     if(data.getCount()==0){
