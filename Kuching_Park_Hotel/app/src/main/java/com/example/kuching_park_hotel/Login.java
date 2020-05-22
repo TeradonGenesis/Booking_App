@@ -38,13 +38,15 @@ public class Login extends AppCompatActivity {
     private final String URL = "http://10.0.2.2/connections/android/email_verification.php";
     private static final String user_email = "user_email";
     private static final String SHARED_PREF = "member";
-    ArrayList<Member> memberArrayList = new ArrayList<Member>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //somewhere here check whether got previous login details using Shared Preferences
+        //if not then do below login page
 
+        //Login stuff if don't have login details stored locally
         button = findViewById(R.id.button_main);
         login_email=findViewById(R.id.editText_login_email);
         login_password=findViewById(R.id.editText_password_email);
@@ -59,8 +61,6 @@ public class Login extends AppCompatActivity {
                 email_details = login_email.getText().toString();
 
                 getData();
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
 
             }
         });
@@ -78,35 +78,38 @@ public class Login extends AppCompatActivity {
                 {
                     Log.d("console","Inside the try");
                     JSONArray res = new JSONArray(response);
-                    //add data into the member object
-                    //Log.d("TEST", String.valueOf(res));
+                    if(res.length()==0){
+                        //code to handle if there isn't any user info
+                    }else{
+                        //add data into the member object
+                        //Log.d("TEST", String.valueOf(res));
+                        for(int i=0;i<res.length();i++){
+                            JSONObject jsonObject = res.getJSONObject(i);
 
-                    for(int i=0;i<res.length();i++){
-                        JSONObject jsonObject = res.getJSONObject(i);
-
-                        Member member = new Member
-                                (jsonObject.getString("member_no"),
-                                jsonObject.getString("name"),
-                                jsonObject.getString("address"),
-                                jsonObject.getString("email"),
-                                jsonObject.getString("country"),
-                                jsonObject.getString("state"),
-                                jsonObject.getString("city"),
-                                jsonObject.getInt("mobile"),
-                                jsonObject.getInt("postcode"));
-                        test_member = member;
+                            Member member = new Member
+                                    (jsonObject.getString("member_no"),
+                                            jsonObject.getString("name"),
+                                            jsonObject.getString("address"),
+                                            jsonObject.getString("email"),
+                                            jsonObject.getString("country"),
+                                            jsonObject.getString("state"),
+                                            jsonObject.getString("city"),
+                                            jsonObject.getInt("mobile"),
+                                            jsonObject.getInt("postcode"));
+                            test_member = member;
+                        }
+                        Log.d("test_member",test_member.getName());
+//                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                        startActivity(intent);
                     }
-                    Log.d("test_member",test_member.getAddress());
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                //error toast or whatever
             }
         })
         {
