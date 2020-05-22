@@ -1,5 +1,6 @@
 package com.example.kuching_park_hotel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*
 * Assumptions:
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 * Integer: mobile, postcode. I assume that mobile is typed in a string of digits without break
 *          like 0123456,not 0123-1233, and that the postcode is not alphanumeric.
 * */
-public class Member {
+public class Member implements Serializable {
     private String member_no,name,address,email,country,state,city;
     private int mobile,postcode;
 

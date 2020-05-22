@@ -98,9 +98,10 @@ public class Login extends AppCompatActivity {
                                             jsonObject.getInt("postcode"));
                             test_member = member;
                         }
-                        Log.d("test_member",test_member.getName());
-//                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-//                        startActivity(intent);
+                        Log.d("Login, inside try catch",test_member.getName());
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        intent.putExtra("Member",test_member);
+                        startActivity(intent);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
