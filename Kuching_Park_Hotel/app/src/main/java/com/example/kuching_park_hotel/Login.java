@@ -33,29 +33,39 @@ public class Login extends AppCompatActivity {
     EditText login_password;
     String email_details;
     String email_password;
+
+    //temp store data
     Member test_member;
+    String jwt;
 
     //RequestQueue - to be cleaned
     RequestQueue rq;
     private final String URL = "http://10.0.2.2/connections/android/email_verification.php";
+    private final String API_URL = "http://10.0.2.2/connections/android/api_gen.php";
 
     //SharedPref - to be cleaned
     private static final String SHARED_PREF = "member";
     private static final String MEMBER_OBJECT = "member_object";
-
+    private static final String JWT ="jwt";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //somewhere here check whether got previous login details using Shared Preferences
         //if not then do below login page
+
+        //reset shared pref for test sake
+//        resetSharedPref();
+
+        //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(MEMBER_OBJECT,"");
-
+        String stored_jwt = sharedPreferences.getString(JWT,"");
         //add code to check token validity
+
         //then proceed to grab json object from shared pref
-        if(json.equals("")){
+        if(json.equals("") && stored_jwt.equals("")){
             //Login stuff if don't have login details stored locally
             button = findViewById(R.id.button_main);
             login_email=findViewById(R.id.editText_login_email);
@@ -72,16 +82,88 @@ public class Login extends AppCompatActivity {
             });
         }else{
             test_member = gson.fromJson(json,Member.class);
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-            intent.putExtra("Member",test_member);
-            startActivity(intent);
+            apiValid(new VolleyCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    if(result.equals("1")){
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        intent.putExtra("Member",test_member);
+                        startActivity(intent);
+                    }else{
+                        Log.d("console","Invalid key");
+                    }
+                }
+            });
+
         }
     }
 
+    private void resetSharedPref() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MEMBER_OBJECT,"");
+        editor.apply();
+    }
+
+
+
     //check token validity
+    private void apiValid(final VolleyCallback callback){
+        rq = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+        StringRequest sr = new StringRequest(Request.Method.POST, API_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String result = response;
+                callback.onSuccess(result);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                String option="verify";
+                params.put("option",option);
+                params.put("jwt","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmUiOjE1OTA2NzAwNjN9.ABUgC-_AJMAWEaW2_Ss55hm5XcW_hGC-DshY0L2RF7o");
+                return params;
+            }
+        };
+        MySingleton.getInstance(this).addToRequestQueue(sr);
+    }
+    public interface VolleyCallback{
+        void onSuccess(String result);
+    }
     //generate token and store in shared pref
+    private void apiGen(){
+        rq = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+        StringRequest sr = new StringRequest(Request.Method.POST, API_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String jwt = response;
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(JWT,jwt);
+                editor.apply();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                String option="gen";
+                params.put("option",option);
+                return params;
+            }
+        };
+        MySingleton.getInstance(this).addToRequestQueue(sr);
+    }
     //Get member data
     private void getData()
     {
@@ -115,7 +197,7 @@ public class Login extends AppCompatActivity {
                             test_member = member;
                         }
                         //call genkey here before moving to new activity,save in shared pref
-
+                        apiGen();
                         //use gson to save object into shared pref
                         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();

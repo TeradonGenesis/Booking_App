@@ -1,6 +1,6 @@
 <?php
 
-$conn=mysqli_connect("localhost","root","","android_test");
+$conn=mysqli_connect("localhost","root","","android");
 $stmt = $conn->prepare("SELECT * FROM booking_history");
 $stmt->execute();
 $result = $stmt->get_result();

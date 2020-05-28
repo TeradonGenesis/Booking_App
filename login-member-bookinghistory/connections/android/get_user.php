@@ -1,6 +1,6 @@
 <?php
 
-$conn=mysqli_connect("localhost","root","","android_test");
+$conn=mysqli_connect("localhost","root","","android");
 if(isset($_POST['guest_ref'])){
     $guest_ref = $_POST['guest_ref'];
     $stmt = $conn->prepare("SELECT * FROM booking_history WHERE guest_ref=?");
