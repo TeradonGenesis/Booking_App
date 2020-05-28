@@ -1,5 +1,11 @@
 package com.example.kuching_park_hotel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Room {
 
     private String id, image_link, room_name, no_beds, description;
@@ -95,6 +101,29 @@ public class Room {
         this.t7_price = builder.t7_price;
     }
 
+    public Double getCurrentPricing(Date current) throws ParseException {
+        Double price = 0.00;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date t1_from = format.parse(this.t1_from);
+        Date t1_to = format.parse(this.t1_to);
+        Date t2_from = format.parse(this.t2_from);
+        Date t2_to = format.parse(this.t2_to);
+        Date t3_from = format.parse(this.t3_from);
+        Date t3_to = format.parse(this.t3_to);
+
+        if(current.compareTo(t1_from) * current.compareTo(t1_to) >= 0) {
+            price = t1_price;
+        } else if(current.compareTo(t2_from) * current.compareTo(t2_to) >= 0){
+            price = t2_price;
+        } else if(current.compareTo(t3_from) * current.compareTo(t3_to) >= 0) {
+            price = t3_price;
+        } else {
+            price = this.price;
+        }
+
+        return price;
+    }
+    //getters
     public String getId() {
         return id;
     }

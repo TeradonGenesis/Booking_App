@@ -1,6 +1,8 @@
 package com.example.kuching_park_hotel;
 
 import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -36,7 +44,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Room room = roomArrayList.get(position);
-        String price_string = String.format("%.2f", room.getPrice());
+
+        Double price = 0.00;
+        Date current = new Date();
+
+        try {
+            price = room.getCurrentPricing(current);
+            String price_string = String.format("%.2f", price);
+            holder.price.setText("RM".concat(price_string));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String price_string = String.format("%.2f", price);
         String photo = room.getImage_link();
         String photo_url = url + "/" +  room.getId() + "/" + photo;
         Picasso.get().load(photo_url).into(holder.roomImage);
@@ -44,8 +64,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.roomName.setText(room.getRoom_name());
         holder.noBeds.setText(room.getNo_beds());
         holder.noGuests.setText(String.valueOf(room.getNo_guests()).concat(" guests"));
-        holder.price.setText("RM".concat(price_string));
-
     }
 
     @Override
@@ -57,6 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         private ImageView roomImage;
         private TextView roomName, noBeds, noGuests, price;
+        private TextView dateShown;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +84,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             noBeds = itemView.findViewById(R.id.textView_noBeds);
             noGuests = itemView.findViewById(R.id.textView_noGuests);
             price = itemView.findViewById(R.id.textView_roomPrice);
+            dateShown = itemView.findViewById(R.id.textView_date);
             itemView.setOnClickListener(this);
         }
 
