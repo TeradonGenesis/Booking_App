@@ -36,7 +36,6 @@ public class Login extends AppCompatActivity {
 
     //temp store data
     Member test_member;
-    String jwt;
 
     //RequestQueue - to be cleaned
     RequestQueue rq;
@@ -93,7 +92,7 @@ public class Login extends AppCompatActivity {
                         Log.d("console","Invalid key");
                     }
                 }
-            });
+            },stored_jwt);
 
         }
     }
@@ -102,13 +101,14 @@ public class Login extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(MEMBER_OBJECT,"");
+        editor.putString(JWT,"");
         editor.apply();
     }
 
 
 
     //check token validity
-    private void apiValid(final VolleyCallback callback){
+    private void apiValid(final VolleyCallback callback,final String jwt){
         rq = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
         StringRequest sr = new StringRequest(Request.Method.POST, API_URL, new Response.Listener<String>() {
             @Override
@@ -127,7 +127,7 @@ public class Login extends AppCompatActivity {
                 Map<String,String> params = new HashMap<>();
                 String option="verify";
                 params.put("option",option);
-                params.put("jwt","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmUiOjE1OTA2NzAwNjN9.ABUgC-_AJMAWEaW2_Ss55hm5XcW_hGC-DshY0L2RF7o");
+                params.put("jwt",jwt);
                 return params;
             }
         };
