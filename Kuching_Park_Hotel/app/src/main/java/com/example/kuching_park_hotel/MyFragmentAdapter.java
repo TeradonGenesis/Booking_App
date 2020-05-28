@@ -6,11 +6,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class MyFragmentAdapter extends FragmentPagerAdapter {
     private Fragment[] childFragments;
-    private String[] tabTitles = new String[]{"Rooms", "Enquiry", "Map"};
+    private Member test_member;
+    private String[] tabTitles = new String[]{"Rooms", "Enquiry", "Map","User Profile"};
 
-    public MyFragmentAdapter(FragmentManager fm) {
+    public MyFragmentAdapter(FragmentManager fm, Member member) {
         super(fm);
-        childFragments = new Fragment[]{new Booking_Fragment(), new Enquiry_Fragment(), new Map_Fragment()};
+        test_member = member;
+        childFragments = new Fragment[]{new Booking_Fragment(), new Enquiry_Fragment(), new Map_Fragment(),new User_profile_Fragment(test_member)};
     }
 
     @Override

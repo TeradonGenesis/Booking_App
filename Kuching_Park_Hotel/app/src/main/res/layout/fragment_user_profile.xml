@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        />
+
+    <EditText
+        android:id="@+id/editText_user_name"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView_user_name"
+        android:ems="10"
+        android:background="@drawable/rounded"
+        android:inputType="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:clickable="false"
+        />
+
+    <TextView
+        android:id="@+id/textView_user_email"
+        app:layout_constraintTop_toBottomOf="@id/editText_user_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textStyle="bold"
+        android:textColor="@color/blue"/>
+
+    <EditText
+        android:id="@+id/editText_user_email"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView_user_email"
+        android:ems="10"
+        android:background="@drawable/rounded"
+        android:inputType="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text=""
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:clickable="false"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textView_user_address"
+        app:layout_constraintTop_toBottomOf="@id/editText_user_email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        android:textStyle="bold"
+        android:textColor="@color/blue"/>
+
+    <EditText
+        android:id="@+id/editText_user_address"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView_user_address"
+        android:ems="10"
+        android:background="@drawable/rounded"
+        android:inputType="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text=""
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:clickable="false"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textView_user_mobile"
+        app:layout_constraintTop_toBottomOf="@id/editText_user_address"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Number:"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/editText_user_mobile"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView_user_mobile"
+        android:ems="10"
+        android:background="@drawable/rounded"
+        android:inputType="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text=""
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:clickable="false"
+        android:textStyle="bold"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
