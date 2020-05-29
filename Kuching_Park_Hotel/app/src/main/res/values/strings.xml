@@ -18,4 +18,8 @@
     <string name="address_title">Address</string>
     <string name="address_content">Lot 606 Padungan Road, 93100 Kuching, Sarawak</string>
     <string name="getmap">Go to Google Map</string>
+    <string name="upcoming_booking">Upcoming Booking</string>
+    <string name="duration">Duration</string>
+    <string name="services">Services</string>
+    <string name="what_will_you_be_doing_today">What will you be doing today?</string>
 </resources>
