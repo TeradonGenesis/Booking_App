@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardmargin_main">10dp</dimen>
+    <dimen name="textpad_main">5dp</dimen>
+    <dimen name="cardpad_main">10dp</dimen>
+    <dimen name="imagemargin_main">5dp</dimen>
+    <dimen name="imagepad_main">10dp</dimen>
+    <dimen name="cardtitlesize_main">20sp</dimen>
+</resources>

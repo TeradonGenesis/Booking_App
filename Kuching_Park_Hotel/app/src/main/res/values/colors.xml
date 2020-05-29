@@ -10,4 +10,5 @@
     <color name="grey_label">#777777</color>
     <color name="grey_line">#aaaaab</color>
     <color name="white">#ffffff</color>
+    <color name="grey">#f3f3f3</color>
 </resources>

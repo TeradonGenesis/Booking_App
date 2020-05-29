@@ -28,4 +28,8 @@
     <string name="phone_label">PHONE</string>
     <string name="book_label">BOOK A ROOM</string>
     <string name="title_activity_room_detail">room_detail</string>
+    <string name="upcoming_booking">Upcoming Booking</string>
+    <string name="duration">Duration</string>
+    <string name="services">Services</string>
+    <string name="what_will_you_be_doing_today">What will you be doing today?</string>
 </resources>
