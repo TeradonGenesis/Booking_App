@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/green"
+    android:padding="15dp"
+    tools:context="com.example.kuching_park_hotel.FindRoom_Activity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_booking_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_booking_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"/>
+
+
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:src="@drawable/logo"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/button_send_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/book_label"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:background="@color/orange"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relativelayout"/>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView_logo">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_booking_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/imageView_roomtype"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/room_type" />
+
+
+        <ImageView
+            android:id="@+id/imageView_norooms"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:layout_below="@id/spinner_roomtype"
+            android:scaleType="fitXY"
+            android:src="@drawable/room_type" />
+
+        <TextView
+            android:id="@+id/textView_norooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imageView_norooms"
+            android:layout_toRightOf="@id/imageView_norooms"
+            android:text="@string/no_rooms_label" />
+
+        <EditText
+            android:id="@+id/editText_norooms"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_norooms"
+            android:layout_alignLeft="@id/imageView_norooms"
+            android:ems="10"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
+        <ImageButton
+            android:id="@+id/imageButton_up"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/plus"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="35dp"
+            android:layout_toRightOf="@id/editText_norooms"
+            android:layout_alignBottom="@id/editText_norooms"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_down"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/minus"
+            android:layout_toRightOf="@id/imageButton_up"
+            android:layout_alignBottom="@id/imageButton_up"/>
+
+        <ImageView
+            android:id="@+id/imageView_checkin"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageButton_up"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/calendar" />
+
+        <TextView
+            android:id="@+id/textView_checkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageButton_up"
+            android:layout_alignBottom="@id/imageView_checkin"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/imageView_checkin"
+            android:text="@string/checkin_label" />
+
+        <ImageView
+            android:id="@+id/imageView_checkout"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_roomtype"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@id/textView_checkin"
+            android:layout_alignTop="@id/textView_checkin"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/calendar" />
+
+        <TextView
+            android:id="@+id/textView_checkout"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_below="@id/spinner_roomtype"
+            android:layout_alignTop="@id/textView_checkin"
+            android:layout_alignBottom="@id/imageView_checkout"
+            android:layout_toRightOf="@id/imageView_checkout"
+            android:text="@string/checkout_label" />
+
+        <EditText
+            android:id="@+id/editText_checkin"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_checkin"
+            android:clickable="true"
+            android:focusable="false"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/editText_checkout"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_checkout"
+            android:layout_alignLeft="@id/imageView_checkout"
+            android:clickable="true"
+            android:focusable="false"
+            android:ems="10" />
+
+        <ImageView
+            android:id="@+id/imageView_name"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_checkin"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/name" />
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_checkin"
+            android:layout_alignBottom="@id/imageView_name"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/imageView_name"
+            android:text="@string/name_label" />
+
+        <EditText
+            android:id="@+id/editText_name"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/shadow"
+            android:labelFor="@id/textView_enquiryemail"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/imageView_name"
+            android:padding="5dp"/>
+
+        <ImageView
+            android:id="@+id/imageView_email"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_name"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/email_label" />
+
+        <TextView
+            android:id="@+id/textView_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_name"
+            android:layout_alignBottom="@id/imageView_email"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/imageView_email"
+            android:text="@string/email_label" />
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/shadow"
+            android:labelFor="@id/textView_enquiryemail"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/imageView_email"
+            android:padding="5dp"/>
+
+        <ImageView
+            android:id="@+id/imageView_phone"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_email"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/phone" />
+
+        <TextView
+            android:id="@+id/textView_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_email"
+            android:layout_alignBottom="@id/imageView_phone"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/imageView_phone"
+            android:text="@string/phone_label" />
+
+        <EditText
+            android:id="@+id/editText_phone"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/shadow"
+            android:labelFor="@id/textView_phone"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/imageView_phone"
+            android:padding="5dp"/>
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
