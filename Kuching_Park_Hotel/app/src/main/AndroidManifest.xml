@@ -17,7 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FindRoom_Activity"></activity>
+        <activity
+            android:name=".Search_Room_Activity"
+            android:label="@string/title_activity_search__room_"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".FindRoom_Activity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

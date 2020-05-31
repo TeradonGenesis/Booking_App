@@ -24,14 +24,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="68dp"
-            android:layout_height="67dp"
-            android:src="@drawable/icons8-menu-24"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card1"
@@ -137,7 +129,7 @@
             android:layout_margin="@dimen/cardmargin_main"
             android:padding="@dimen/cardpad_main"
             android:background="@drawable/rounded"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card1">
 
@@ -163,44 +155,133 @@
                 app:layout_constraintStart_toStartOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="135dp"
-                android:layout_height="97dp"
-                android:src="@drawable/plus"
-                android:background="@drawable/rounded"
-                android:padding="@dimen/imagepad_main"
-                android:layout_margin="@dimen/imagemargin_main"
-                app:layout_constraintEnd_toStartOf="@+id/imageView5"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            <GridLayout
+                android:columnCount="3"
+                android:rowCount="1"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textView11"
+                app:layout_constraintLeft_toLeftOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="136dp"
-                android:layout_height="97dp"
-                android:src="@drawable/plus"
-                android:background="@drawable/rounded"
-                android:padding="@dimen/imagepad_main"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                app:layout_constraintEnd_toStartOf="@+id/imageView6"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_bed"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="136dp"
-                android:layout_height="97dp"
-                android:src="@drawable/plus"
-                android:background="@drawable/rounded"
-                android:padding="@dimen/imagepad_main"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:src="@drawable/bed_big"
+                            android:padding="10dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+                        </ImageView>
+                        <TextView
+                            android:textSize="16sp"
+                            android:text="Rooms"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_grey"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_points"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:src="@drawable/coin_big"
+                            android:padding="10dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+                        </ImageView>
+                        <TextView
+                            android:textSize="16sp"
+                            android:text="Points"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_grey"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_cart"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:src="@drawable/cart_big"
+                            android:padding="10dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Retailers"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="16sp"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

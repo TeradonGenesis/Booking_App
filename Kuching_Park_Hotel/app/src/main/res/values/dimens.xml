@@ -6,4 +6,5 @@
     <dimen name="imagemargin_main">5dp</dimen>
     <dimen name="imagepad_main">10dp</dimen>
     <dimen name="cardtitlesize_main">20sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
