@@ -2,6 +2,7 @@ package com.example.kuching_park_hotel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,21 +52,13 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Create account starts here
-        button_create_account=findViewById(R.id.button_create_account);
-        button_create_account.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent2 = new Intent(getApplicationContext(),Account_Creation_Activity.class);
-                startActivity(intent2);
-            }
-        });
+
 
         //somewhere here check whether got previous login details using Shared Preferences
         //if not then do below login page
 
         //reset shared pref for test sake
-        resetSharedPref();
+//        resetSharedPref();
 
         //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -80,7 +73,15 @@ public class Login extends AppCompatActivity {
             button = findViewById(R.id.button_main);
             login_email=findViewById(R.id.editText_login_email);
             login_password=findViewById(R.id.editText_password_email);
-
+            //Create account starts here
+            button_create_account=findViewById(R.id.button_create_account);
+            button_create_account.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent intent2 = new Intent(getApplicationContext(),Account_Creation_Activity.class);
+                    startActivity(intent2);
+                }
+            });
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -95,19 +96,23 @@ public class Login extends AppCompatActivity {
             apiValid(new VolleyCallback() {
                 @Override
                 public void onSuccess(String result) {
+                    //add more error handling
                     if(result.equals("1")){
+                        Log.d("CONSOLE","AUTOLOGIN SUCCESS!");
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         intent.putExtra("Member",test_member);
                         startActivity(intent);
                     }else{
-                        Log.d("console","Invalid key");
+                        Log.d("console","Invalid key or your account doesn't exist!");
                     }
                 }
-            },stored_jwt);
-
+            },stored_jwt,test_member);
         }
     }
 
+
+
+    //for testing purposes, remember to DELETE
     private void resetSharedPref() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -118,19 +123,20 @@ public class Login extends AppCompatActivity {
 
 
 
-    //check token validity
-    private void apiValid(final VolleyCallback callback,final String jwt){
+    //check token validity, first checks whether JWT token is valid, then check whether user account still exists
+    // there is the case where the user account did exist but then got deleted for various reasons, this prevents accidental autologin
+    //of deleted account.
+    private void apiValid(final VolleyCallback callback,final String jwt,final Member test_member){
         rq = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
         StringRequest sr = new StringRequest(Request.Method.POST, API_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String result = response;
-                callback.onSuccess(result);
+                callback.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.d("console","No data returned in apiValid");
             }
         }){
             @Override
@@ -139,14 +145,18 @@ public class Login extends AppCompatActivity {
                 String option="verify";
                 params.put("option",option);
                 params.put("jwt",jwt);
+                params.put("email",test_member.getEmail());
+                params.put("password",test_member.getPassword());
                 return params;
             }
         };
         MySingleton.getInstance(this).addToRequestQueue(sr);
     }
+    //interface for execution of function after async task is done
     public interface VolleyCallback{
         void onSuccess(String result);
     }
+
     //generate token and store in shared pref
     private void apiGen(){
         rq = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
@@ -175,6 +185,7 @@ public class Login extends AppCompatActivity {
         };
         MySingleton.getInstance(this).addToRequestQueue(sr);
     }
+
     //Get member data
     private void getData()
     {
@@ -203,9 +214,11 @@ public class Login extends AppCompatActivity {
                                             jsonObject.getString("country"),
                                             jsonObject.getString("state"),
                                             jsonObject.getString("city"),
+                                            jsonObject.getString("password"),
                                             jsonObject.getInt("mobile"),
                                             jsonObject.getInt("postcode"));
                             test_member = member;
+                            Log.d("MY PASSWORD IS:",test_member.getPassword());
                         }
                         //call genkey here before moving to new activity,save in shared pref
                         apiGen();

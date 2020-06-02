@@ -9,11 +9,11 @@ import java.util.ArrayList;
 *          like 0123456,not 0123-1233, and that the postcode is not alphanumeric.
 * */
 public class Member implements Serializable {
-    private String member_no,name,address,email,country,state,city;
+    private String member_no,name,address,email,country,state,city,password;
     private int mobile,postcode;
 
 
-    public Member(String member_no, String name, String address, String email, String country, String state, String city, int mobile, int postcode) {
+    public Member(String member_no, String name, String address, String email, String country, String state, String city,String password ,int mobile, int postcode) {
         this.member_no = member_no;
         this.name = name;
         this.address = address;
@@ -23,6 +23,7 @@ public class Member implements Serializable {
         this.city = city;
         this.mobile = mobile;
         this.postcode = postcode;
+        this.password= password;
     }
 
     public String getMember_no() {
@@ -51,6 +52,10 @@ public class Member implements Serializable {
 
     public String getCity() {
         return city;
+    }
+
+    public String getPassword(){
+        return password;
     }
 
     public int getMobile() {
