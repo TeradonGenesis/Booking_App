@@ -104,6 +104,8 @@ public class Login extends AppCompatActivity {
                         startActivity(intent);
                     }else{
                         Log.d("console","Invalid key or your account doesn't exist!");
+                        //clear SharedPrefs
+                        resetSharedPref();
                     }
                 }
             },stored_jwt,test_member);
