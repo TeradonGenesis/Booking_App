@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
-    Button button;
+    Button button,button_create_account;
     EditText login_email;
     EditText login_password;
     String email_details;
@@ -50,11 +50,22 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Create account starts here
+        button_create_account=findViewById(R.id.button_create_account);
+        button_create_account.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent2 = new Intent(getApplicationContext(),Account_Creation_Activity.class);
+                startActivity(intent2);
+            }
+        });
+
         //somewhere here check whether got previous login details using Shared Preferences
         //if not then do below login page
 
         //reset shared pref for test sake
-//        resetSharedPref();
+        resetSharedPref();
 
         //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -75,8 +86,8 @@ public class Login extends AppCompatActivity {
                 public void onClick(View v) {
                     email_details = login_email.getText().toString();
                     email_password = login_password.getText().toString();
-                    getData();
 
+                    getData();
                 }
             });
         }else{
@@ -177,7 +188,7 @@ public class Login extends AppCompatActivity {
                     Log.d("console","Inside the try");
                     JSONArray res = new JSONArray(response);
                     if(res.length()==0){
-                        //code to handle if there isn't any user info
+                        Toast.makeText(Login.this, "Email or password does not match", Toast.LENGTH_SHORT).show();
                     }else{
                         //add data into the member object
                         //Log.d("TEST", String.valueOf(res));
@@ -218,7 +229,7 @@ public class Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //error toast or whatever
+                //error handling
             }
         })
         {
