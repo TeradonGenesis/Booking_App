@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
         //if not then do below login page
 
         //reset shared pref for test sake
-//        resetSharedPref();
+        resetSharedPref();
 
         //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -244,7 +244,7 @@ public class Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //error handling
+                Toast.makeText(Login.this, "No internet connection", Toast.LENGTH_SHORT).show();
             }
         })
         {
