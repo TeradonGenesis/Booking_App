@@ -200,6 +200,7 @@ public class Search_Room_Activity extends AppCompatActivity {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 send_availability(check_in, check_out, nights, qty, guests);
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.

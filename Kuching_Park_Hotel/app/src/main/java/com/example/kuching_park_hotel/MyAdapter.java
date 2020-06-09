@@ -85,7 +85,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         private ImageView roomImage;
         private TextView roomName, noBeds, noGuests, price;
-        private TextView dateShown;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,7 +93,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             noBeds = itemView.findViewById(R.id.textView_noBeds);
             noGuests = itemView.findViewById(R.id.textView_noGuests);
             price = itemView.findViewById(R.id.textView_roomPrice);
-            dateShown = itemView.findViewById(R.id.textView_date);
             itemView.setOnClickListener(this);
         }
 
