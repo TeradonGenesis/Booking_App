@@ -23,6 +23,7 @@ import androidx.core.util.Pair;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +43,10 @@ public class Search_Room_Activity extends AppCompatActivity {
     private CardView cardView_calender, cardView_quantity;
     private TextView textView_checkin_date, textView_checkin_day, textView_checkin_month, textView_nights;
     private TextView textView_checkout_date, textView_checkout_day, textView_checkout_month;
+    private TextView textView_room_qty, textView_guest_qty;
+    private ImageButton imageButton_room_add, imageButton_room_minus, imageButton_guest_add, imageButton_guest_minus;
     private String check_in, check_out;
-    private int nights, qty, guests;
+    private int nights, room_qty = 1, guest_qty = 1;
     private RequestQueue requestQueue;
     private Button btn_check;
 
@@ -56,13 +59,14 @@ public class Search_Room_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         requestQueue = MySingleton.getInstance(getApplicationContext()).getRequestQueue();
         initUI();
+        setDefault();
         dateRangeCalender();
+        clickEvents();
 
     }
 
     public void initUI(){
         cardView_calender = findViewById(R.id.card_chceck_in_out);
-        cardView_quantity = findViewById(R.id.card_quantity);
 
         //check in text views
         textView_checkin_date = findViewById(R.id.textView_checkin_date);
@@ -75,19 +79,59 @@ public class Search_Room_Activity extends AppCompatActivity {
 
         textView_nights = findViewById(R.id.textView_nights_label);
 
+        textView_room_qty = findViewById(R.id.textView_room_qty);
+        textView_guest_qty = findViewById(R.id.textView_guest_qty);
+
+        imageButton_room_add = findViewById(R.id.imageView_room_plus);
+        imageButton_room_minus = findViewById(R.id.imageView_room_minus);
+        imageButton_guest_add = findViewById(R.id.imageView_guest_plus);
+        imageButton_guest_minus = findViewById(R.id.imageView_guest_minus);
+
         btn_check = findViewById(R.id.button_check);
     }
     
 
     public void clickEvents() {
-        btn_check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAvailability(check_in, check_out, nights, qty, guests);
-            }
-        });
+        imageButton_room_add.setOnClickListener(new Click());
+        imageButton_room_minus.setOnClickListener(new Click());
+        imageButton_guest_add.setOnClickListener(new Click());
+        imageButton_guest_minus.setOnClickListener(new Click());
+        btn_check.setOnClickListener(new Click());
+    }
+
+    public void setDefault() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd", Locale.US);
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MMM yy", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("E", Locale.US);
+        SimpleDateFormat date_post_Format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kuala_Lumpur"));
+
+        Long today = calendar.getTimeInMillis();
+        calendar.add(Calendar.DATE, 1);
+        Long nextDay = calendar.getTimeInMillis();
+
+        textView_checkin_date.setText(dateFormat.format(today));
+        textView_checkin_month.setText(monthFormat.format(today));
+        textView_checkin_day.setText(dayFormat.format(today));
+
+        textView_checkout_date.setText(dateFormat.format(nextDay));
+        textView_checkout_month.setText(monthFormat.format(nextDay));
+        textView_checkout_day.setText(dayFormat.format(nextDay));
+
+        Date start = new Date(TimeUnit.SECONDS.toMillis(today));
+        Date end = new Date(TimeUnit.SECONDS.toMillis(nextDay));
+
+        nights = Math.abs(((int)((start.getTime()/(24*60*60*1000)) -(int)(end.getTime()/(24*60*60*1000))))) /1000;
+        textView_nights.setText(String.valueOf(nights).concat(" nights"));
+
+        check_in = date_post_Format.format(today);
+        check_out = date_post_Format.format(nextDay);
 
 
+        textView_room_qty.setText(String.valueOf(room_qty));
+        textView_guest_qty.setText(String.valueOf(guest_qty));
     }
 
     public void dateRangeCalender() {
@@ -119,7 +163,6 @@ public class Search_Room_Activity extends AppCompatActivity {
             @Override public void onPositiveButtonClick(Pair<Long,Long> selection) {
                 // Get the offset from our timezone and UTC.
                 TimeZone timeZoneUTC = TimeZone.getTimeZone("Asia/Kuala_Lumpur");
-                // It will be negative, so that's the -1
 
                 // Create a date format
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd", Locale.US);
@@ -153,7 +196,7 @@ public class Search_Room_Activity extends AppCompatActivity {
 
     //Function to perform a POST function
     public void checkAvailability(final String check_in, final String check_out, final int nights, final int qty, final int guests) {
-        String url = "http://kuchingparkhotel.com.my/mobile_booking.php";
+        String url = "http://192.168.43.136/API/search_room_api.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -170,7 +213,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                 Map<String, String> MyData = new HashMap<String, String>();
                 MyData.put("check_in", check_in);
                 MyData.put("check_out", check_out);
-                MyData.put("nights", String.valueOf(nights);
+                MyData.put("nights", String.valueOf(nights));
                 MyData.put("qty", String.valueOf(qty));
                 MyData.put("guests", String.valueOf(guests));
                 return MyData;
@@ -180,7 +223,7 @@ public class Search_Room_Activity extends AppCompatActivity {
     }
 
     public void send_availability(String check_in, String check_out, int nights, int qty, int guests) {
-        Intent intent = new Intent(Search_Room_Activity.this, Booking_Success.class);
+        Intent intent = new Intent(Search_Room_Activity.this, Room_Listing_Activity.class);
         Bundle availability = new Bundle();
         availability.putString("check_in", check_in);
         availability.putString("check_out", check_out);
@@ -190,6 +233,50 @@ public class Search_Room_Activity extends AppCompatActivity {
         intent.putExtras(availability);
         startActivity(intent);
     }
+
+    //Set up the click events
+    public class Click implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // Perform action on click
+
+            int id = v.getId();
+            switch (id) {
+                case R.id.imageView_room_plus:
+                    room_qty += 1;
+                    textView_room_qty.setText(String.valueOf(room_qty));
+                    break;
+                case R.id.imageView_room_minus:
+                    if(room_qty > 1) {
+                        room_qty -= 1;
+                        textView_room_qty.setText(String.valueOf(room_qty));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Cannot be less than 1", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.imageView_guest_plus:
+                    guest_qty += 1;
+                    textView_guest_qty.setText(String.valueOf(guest_qty));
+                    break;
+                case R.id.imageView_guest_minus:
+                    if(guest_qty > 1) {
+                        guest_qty -= 1;
+                        textView_guest_qty.setText(String.valueOf(guest_qty));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Cannot be less than 1", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.button_check:
+                    checkAvailability(check_in, check_out, nights, room_qty, guest_qty);
+                default:
+                    break;
+
+            }
+
+        }
+    }
+
 
 
 }

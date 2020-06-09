@@ -45,7 +45,7 @@ public class Booking_Fragment extends Fragment {
        View v = inflater.inflate(R.layout.fragment_booking_, container, false);
         requestQueue = MySingleton.getInstance(getActivity().getApplicationContext()).getRequestQueue();
        initUI(v);
-       loadUrlData();
+       /*loadUrlData();*/
        return v;
     }
 
@@ -56,6 +56,7 @@ public class Booking_Fragment extends Fragment {
     }
 
     //Function to obtain perform GET function from the API and load them into the object class to be displayed in the recycler view list
+    /*
     private void loadUrlData() {
 
         if(rooms != null) {
@@ -141,6 +142,6 @@ public class Booking_Fragment extends Fragment {
         });
 
         requestQueue.add(stringRequest);
-    }
+    }*/
 
 }

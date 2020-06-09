@@ -3,6 +3,7 @@ package com.example.kuching_park_hotel;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -16,42 +17,10 @@ public class Room {
     private int stocks;
     private String sub_image1;
     private String sub_image2;
-
-    //tier 1
-    private int t1_pr;
-    private Double t1_price;
-    private String t1_from;
-    private String t1_to;
-
-    //tier 2
-    private int t2_pr;
-    private Double t2_price;
-    private String t2_from;
-    private String t2_to;
-
-    //tier 2
-    private int t3_pr;
-    private Double t3_price;
-    private String t3_from;
-    private String t3_to;
-
-    //tier 4
-    private int t4_pr;
-    private Double t4_price;
-
-    //tier 5
-    private int t5_pr;
-    private Double t5_price;
-
-    //tier 6
-    private int t6_pr;
-    private Double t6_price;
-
-    //tier 7
-    private int t7_pr;
-    private Double t7_price;
+    private ArrayList<Rates> special_rates = new ArrayList<>();
 
 
+    /*
     public Room(Builder builder) {
         this.id = builder.id;
         this.image_link = builder.image_link;
@@ -65,64 +34,12 @@ public class Room {
         this.stocks = builder.stocks;
         this.sub_image1 = builder.sub_image1;
         this.sub_image2 = builder.sub_image2;
+        this.special_rates = builder.special_rates;
 
-        //tier 1
-        this.t1_pr = builder.t1_pr;
-        this.t1_price = builder.t1_price;
-        this.t1_from = builder.t1_from;
-        this.t1_to = builder.t1_to;
-
-        //tier 2
-        this.t2_pr = builder.t2_pr;
-        this.t2_price = builder.t2_price;
-        this.t2_from = builder.t2_from;
-        this.t2_to = builder.t2_to;
-
-        //tier 2
-        this.t3_pr = builder.t3_pr;
-        this.t3_price = builder.t3_price;
-        this.t3_from = builder.t3_from;
-        this.t3_to = builder.t3_to;
-
-        //tier 4
-        this.t4_pr = builder.t4_pr;
-        this.t4_price = builder.t4_price;
-
-        //tier 5
-        this.t5_pr = builder.t5_pr;
-        this.t5_price = builder.t5_price;
-
-        //tier 6
-        this.t6_pr = builder.t6_pr;
-        this.t6_price = builder.t6_price;
-
-        //tier 7
-        this.t7_pr = builder.t7_pr;
-        this.t7_price = builder.t7_price;
     }
+     */
 
-    public Double getCurrentPricing(Date current) throws ParseException {
-        Double price = 0.00;
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date t1_from = format.parse(this.t1_from);
-        Date t1_to = format.parse(this.t1_to);
-        Date t2_from = format.parse(this.t2_from);
-        Date t2_to = format.parse(this.t2_to);
-        Date t3_from = format.parse(this.t3_from);
-        Date t3_to = format.parse(this.t3_to);
 
-        if(current.compareTo(t1_from) * current.compareTo(t1_to) >= 0) {
-            price = t1_price;
-        } else if(current.compareTo(t2_from) * current.compareTo(t2_to) >= 0){
-            price = t2_price;
-        } else if(current.compareTo(t3_from) * current.compareTo(t3_to) >= 0) {
-            price = t3_price;
-        } else {
-            price = this.price;
-        }
-
-        return price;
-    }
     //getters
     public String getId() {
         return id;
@@ -164,94 +81,75 @@ public class Room {
         return stocks;
     }
 
+    /*
     public String getSub_image1() {
         return sub_image1;
     }
 
     public String getSub_image2() {
         return sub_image2;
+    }*/
+
+    public ArrayList<Rates> getSpecial_rates() {
+        return special_rates;
     }
 
-    public int getT1_pr() {
-        return t1_pr;
+
+    //setters
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Double getT1_price() {
-        return t1_price;
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
     }
 
-    public String getT1_from() {
-        return t1_from;
+    public void setRoom_name(String room_name) {
+        this.room_name = room_name;
     }
 
-    public String getT1_to() {
-        return t1_to;
+    public void setNo_beds(String no_beds) {
+        this.no_beds = no_beds;
     }
 
-    public int getT2_pr() {
-        return t2_pr;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Double getT2_price() {
-        return t2_price;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public String getT2_from() {
-        return t2_from;
+    public void setNo_guests(String no_guests) {
+        this.no_guests = no_guests;
     }
 
-    public String getT2_to() {
-        return t2_to;
+    public void setEb_discount(String eb_discount) {
+        this.eb_discount = eb_discount;
     }
 
-    public int getT3_pr() {
-        return t3_pr;
+    public void setEb_duration(String eb_duration) {
+        this.eb_duration = eb_duration;
     }
 
-    public Double getT3_price() {
-        return t3_price;
+    public void setStocks(int stocks) {
+        this.stocks = stocks;
     }
 
-    public String getT3_from() {
-        return t3_from;
+    /*
+    public void setSub_image1(String sub_image1) {
+        this.sub_image1 = sub_image1;
     }
 
-    public String getT3_to() {
-        return t3_to;
+    public void setSub_image2(String sub_image2) {
+        this.sub_image2 = sub_image2;
+    }*/
+
+    public void setSpecial_rates(ArrayList<Rates> special_rates) {
+        this.special_rates = special_rates;
     }
 
-    public int getT4_pr() {
-        return t4_pr;
-    }
-
-    public Double getT4_price() {
-        return t4_price;
-    }
-
-    public int getT5_pr() {
-        return t5_pr;
-    }
-
-    public Double getT5_price() {
-        return t5_price;
-    }
-
-    public int getT6_pr() {
-        return t6_pr;
-    }
-
-    public Double getT6_price() {
-        return t6_price;
-    }
-
-    public int getT7_pr() {
-        return t7_pr;
-    }
-
-    public Double getT7_price() {
-        return t7_price;
-    }
-
+    /*
     public static class Builder {
         private String id, image_link, room_name, no_beds, description;
         private Double price;
@@ -261,40 +159,7 @@ public class Room {
         private int stocks;
         private String sub_image1;
         private String sub_image2;
-
-        //tier 1
-        private int t1_pr;
-        private Double t1_price;
-        private String t1_from;
-        private String t1_to;
-
-        //tier 2
-        private int t2_pr;
-        private Double t2_price;
-        private String t2_from;
-        private String t2_to;
-
-        //tier 2
-        private int t3_pr;
-        private Double t3_price;
-        private String t3_from;
-        private String t3_to;
-
-        //tier 4
-        private int t4_pr;
-        private Double t4_price;
-
-        //tier 5
-        private int t5_pr;
-        private Double t5_price;
-
-        //tier 6
-        private int t6_pr;
-        private Double t6_price;
-
-        //tier 7
-        private int t7_pr;
-        private Double t7_price;
+        private ArrayList<Rates> special_rates;
 
         public static Builder newInstance() {
             return new Builder();
@@ -360,108 +225,15 @@ public class Room {
             return this;
         }
 
-        public Builder setT1_pr(int t1_pr) {
-            this.t1_pr = t1_pr;
+        public Builder setSpecial_Rates(ArrayList<Rates> special_rates) {
+            this.special_rates = special_rates;
             return this;
         }
 
-        public Builder setT1_price(Double t1_price) {
-            this.t1_price = t1_price;
-            return this;
-        }
 
-        public Builder setT1_from(String t1_from) {
-            this.t1_from = t1_from;
-            return this;
-        }
-
-        public Builder setT1_to(String t1_to) {
-            this.t1_to = t1_to;
-            return this;
-        }
-
-        public Builder setT2_pr(int t2_pr) {
-            this.t2_pr = t2_pr;
-            return this;
-        }
-
-        public Builder setT2_price(Double t2_price) {
-            this.t2_price = t2_price;
-            return this;
-        }
-
-        public Builder setT2_from(String t2_from) {
-            this.t2_from = t2_from;
-            return this;
-        }
-
-        public Builder setT2_to(String t2_to) {
-            this.t2_to = t2_to;
-            return this;
-        }
-
-        public Builder setT3_pr(int t3_pr) {
-            this.t3_pr = t3_pr;
-            return this;
-        }
-
-        public Builder setT3_price(Double t3_price) {
-            this.t3_price = t3_price;
-            return this;
-        }
-
-        public Builder setT3_from(String t3_from) {
-            this.t3_from = t3_from;
-            return this;
-        }
-
-        public Builder setT3_to(String t3_to) {
-            this.t3_to = t3_to;
-            return this;
-        }
-
-        public Builder setT4_pr(int t4_pr) {
-            this.t4_pr = t4_pr;
-            return this;
-        }
-
-        public Builder setT4_price(Double t4_price) {
-            this.t4_price = t4_price;
-            return this;
-        }
-
-        public Builder setT5_pr(int t5_pr) {
-            this.t5_pr = t5_pr;
-            return this;
-        }
-
-        public Builder setT5_price(Double t5_price) {
-            this.t5_price = t5_price;
-            return this;
-        }
-
-        public Builder setT6_pr(int t6_pr) {
-            this.t6_pr = t6_pr;
-            return this;
-        }
-
-        public Builder setT6_price(Double t6_price) {
-            this.t6_price = t6_price;
-            return this;
-        }
-
-        public Builder setT7_pr(int t7_pr) {
-            this.t7_pr = t7_pr;
-            return this;
-        }
-
-        public Builder setT7_price(Double t7_price) {
-            this.t7_price = t7_price;
-            return this;
-        }
 
         public Room build() {
             return new Room(this);
         }
-    }
+    }*/
 }

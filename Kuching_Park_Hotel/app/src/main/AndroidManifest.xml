@@ -18,11 +18,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Room_Listing_Activity"
+            android:label="@string/title_activity_room__listing_"
+            android:parentActivityName=".Search_Room_Activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Search_Room_Activity"
             android:label="@string/title_activity_search__room_"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".FindRoom_Activity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
