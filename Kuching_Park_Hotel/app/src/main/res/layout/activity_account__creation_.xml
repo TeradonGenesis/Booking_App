@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kuching_park_hotel.Account_Creation_Activity">
+
+    <TextView
+        android:id="@+id/textView_personal_Information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Personal Information"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="70dp"
+        android:background="@color/yellowgreen"/>
+
+    <TextView
+        android:id="@+id/textView_Guest_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guest Name:"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="11dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView_personal_Information"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_Guest_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="15dp"
+        android:hint="Guest Name"
+        app:layout_constraintLeft_toRightOf="@id/textView_Guest_name"
+        app:layout_constraintTop_toBottomOf="@id/textView_personal_Information"/>
+
+    <TextView
+        android:id="@+id/textView_Guest_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="11dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_Guest_name"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_Guest_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="15dp"
+        android:hint="Email"
+        app:layout_constraintLeft_toRightOf="@id/textView_Guest_email"
+        app:layout_constraintTop_toBottomOf="@id/editText_Guest_name"/>
+    <TextView
+        android:id="@+id/textView_Guest_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="11dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_Guest_email"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_Guest_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:hint="Password"
+        app:layout_constraintLeft_toRightOf="@id/textView_Guest_password"
+        app:layout_constraintTop_toBottomOf="@id/editText_Guest_email"/>
+
+    <TextView
+        android:id="@+id/textView_Guest_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="11dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_Guest_password"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_Guest_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:hint="Confirm Password"
+        app:layout_constraintLeft_toRightOf="@id/textView_Guest_confirm_password"
+        app:layout_constraintTop_toBottomOf="@id/editText_Guest_password"/>
+
+    <TextView
+        android:id="@+id/textView_Guest_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="11dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_Guest_confirm_password"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_Guest_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="15dp"
+        android:hint="Mobile Number"
+        app:layout_constraintLeft_toRightOf="@id/textView_Guest_mobile"
+        app:layout_constraintTop_toBottomOf="@id/editText_Guest_confirm_password"/>
+
+    <TextView
+        android:id="@+id/textView_Guest_postCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Code:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:padding="11dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_Guest_mobile"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/editText_Guest_postCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="15dp"
+        android:hint="Post Code"
+        app:layout_constraintLeft_toRightOf="@id/textView_Guest_postCode"
+        app:layout_constraintTop_toBottomOf="@id/editText_Guest_mobile"/>
+
+    <Button
+        android:id="@+id/button_account_creation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_Guest_mobile"
+        android:layout_marginTop="50dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

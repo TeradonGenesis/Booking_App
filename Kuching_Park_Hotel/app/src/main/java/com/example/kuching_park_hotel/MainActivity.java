@@ -4,25 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
+    Member member;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getMember();
         initUI();
         initDatabase(this.getApplicationContext());
     }
 
+    private void getMember() {
+        Intent intent = getIntent();
+        member = (Member) intent.getSerializableExtra("Member");
+    }
 
 
     public void initUI() {
         ViewPager viewPager = findViewById(R.id.viewpager);
-        MyFragmentAdapter fragmentPagerAdapter = new MyFragmentAdapter(getSupportFragmentManager());
+        MyFragmentAdapter fragmentPagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(),member);
         viewPager.setAdapter(fragmentPagerAdapter);
         viewPager.setCurrentItem(0);
 

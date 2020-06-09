@@ -1,5 +1,6 @@
 package com.example.kuching_park_hotel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*
 * Assumptions:
@@ -7,12 +8,12 @@ import java.util.ArrayList;
 * Integer: mobile, postcode. I assume that mobile is typed in a string of digits without break
 *          like 0123456,not 0123-1233, and that the postcode is not alphanumeric.
 * */
-public class Member {
-    private String member_no,name,address,email,country,state,city;
+public class Member implements Serializable {
+    private String member_no,name,address,email,country,state,city,password;
     private int mobile,postcode;
-    private ArrayList<Booking_History> booking_history;
 
-    public Member(String member_no, String name, String address, String email, String country, String state, String city, int mobile, int postcode, ArrayList<Booking_History> booking_history) {
+
+    public Member(String member_no, String name, String address, String email, String country, String state, String city,String password ,int mobile, int postcode) {
         this.member_no = member_no;
         this.name = name;
         this.address = address;
@@ -22,7 +23,7 @@ public class Member {
         this.city = city;
         this.mobile = mobile;
         this.postcode = postcode;
-        this.booking_history = booking_history;
+        this.password= password;
     }
 
     public String getMember_no() {
@@ -53,6 +54,10 @@ public class Member {
         return city;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public int getMobile() {
         return mobile;
     }
@@ -61,7 +66,4 @@ public class Member {
         return postcode;
     }
 
-    public ArrayList<Booking_History> getBooking_history() {
-        return booking_history;
-    }
 }
