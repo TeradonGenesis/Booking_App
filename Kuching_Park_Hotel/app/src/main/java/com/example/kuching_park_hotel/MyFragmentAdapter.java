@@ -7,11 +7,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 public class MyFragmentAdapter extends FragmentPagerAdapter {
     private Fragment[] childFragments;
     private String[] tabTitles = new String[]{"Dashboard", "Bookings", "Messages", "Profile"};
+    private Member test_member;
 
     public MyFragmentAdapter(FragmentManager fm, Member member) {
         super(fm);
-        childFragments = new Fragment[]{new Mainpage_Fragment(), new Enquiry_Fragment(), new Map_Fragment(),new User_profile_Fragment(test_member)};
         test_member = member;
+        childFragments = new Fragment[]{new Mainpage_Fragment(), new Enquiry_Fragment(), new Map_Fragment(),new User_profile_Fragment(test_member)};
     }
 
     @Override
