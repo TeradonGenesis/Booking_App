@@ -48,18 +48,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Double price = 0.00;
         Date current = new Date();
 
+        /*
         try {
             price = room.getCurrentPricing(current);
             String price_string = String.format("%.2f", price);
             holder.price.setText("RM".concat(price_string));
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        String price_string = String.format("%.2f", price);
+        String price_string;
         String photo = room.getImage_link();
         String photo_url = url + "/" +  room.getId() + "/" + photo;
+        ArrayList<Rates> ratesArrayList = room.getSpecial_rates();
+
+
         Picasso.get().load(photo_url).into(holder.roomImage);
+
+        if(ratesArrayList.isEmpty()) {
+            holder.price.setText("RM".concat(String.format("%.2f", room.getPrice())));
+        } else {
+            holder.price.setText("RM".concat(String.format("%.2f", ratesArrayList.get(1).getRate())));
+        }
 
         holder.roomName.setText(room.getRoom_name());
         holder.noBeds.setText(room.getNo_beds());
@@ -75,7 +85,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         private ImageView roomImage;
         private TextView roomName, noBeds, noGuests, price;
-        private TextView dateShown;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,7 +93,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             noBeds = itemView.findViewById(R.id.textView_noBeds);
             noGuests = itemView.findViewById(R.id.textView_noGuests);
             price = itemView.findViewById(R.id.textView_roomPrice);
-            dateShown = itemView.findViewById(R.id.textView_date);
             itemView.setOnClickListener(this);
         }
 
@@ -98,11 +106,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             String guests = roomArrayList.get(pos).getNo_guests();
             Double price = roomArrayList.get(pos).getPrice();
             String description = roomArrayList.get(pos).getDescription();
+            ArrayList<Rates> rates_listing = roomArrayList.get(pos).getSpecial_rates();
 
             int stocks = roomArrayList.get(pos).getStocks();
-            String sub_image1 = roomArrayList.get(pos).getSub_image1();
-            String sub_image2 = roomArrayList.get(pos).getSub_image2();
 
+
+
+            /*
             //tier 1
             int t1_pr = roomArrayList.get(pos).getT1_pr();
             Double t1_price = roomArrayList.get(pos).getT1_price();
@@ -136,6 +146,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             //tier 7
             int t7_pr = roomArrayList.get(pos).getT7_pr();
             Double t7_price = roomArrayList.get(pos).getT7_price();
+             */
 
 
             String image_url = url + "/" +  roomArrayList.get(pos).getId() + "/" + image;
@@ -152,6 +163,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             detail_bundle.putInt("stocks", stocks);
 
+            /*
             //t1
             detail_bundle.putInt("t1_pr", t1_pr);
             detail_bundle.putDouble("t1_price", t1_price);
@@ -185,6 +197,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             //t7
             detail_bundle.putInt("t7_pr", t7_pr);
             detail_bundle.putDouble("t7_price", t7_price);
+             */
 
             intent.putExtras(detail_bundle);
             v.getContext().startActivity(intent);

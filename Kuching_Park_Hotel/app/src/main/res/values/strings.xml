@@ -41,5 +41,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+<<<<<<< HEAD
     <string name="rm">RM ""</string>
+=======
+    <string name="title_activity_room__listing_">Room_Listing_Activity</string>
+>>>>>>> 0510e1ae9c9793a3104d7e875f8d576f7809c119
 </resources>
