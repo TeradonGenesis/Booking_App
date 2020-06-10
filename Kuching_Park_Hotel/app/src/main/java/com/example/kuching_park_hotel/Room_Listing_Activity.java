@@ -41,6 +41,7 @@ public class Room_Listing_Activity extends AppCompatActivity {
     private static final String URL_DATA = "http://10.0.2.2/API/search_room_api.php";
     private String checkin, checkout;
     private int nights, qty, guests;
+    private ArrayList<Room> rooms = new ArrayList<Room>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +65,16 @@ public class Room_Listing_Activity extends AppCompatActivity {
     }
 
     public void getBundle() {
-        ArrayList<Room> rooms = new ArrayList<Room>();
-        if((rooms = getIntent().getParcelableArrayListExtra("rooms")) != null) {
 
-            myAdapter = new MyAdapter(rooms);
-            recyclerView.setAdapter(myAdapter);
+        if(rooms != null) {
+            rooms.clear();
+        } else {
+            rooms = new ArrayList<Room>();
         }
+        rooms = getIntent().getParcelableArrayListExtra("rooms");
+        myAdapter = new MyAdapter(rooms);
+        recyclerView.setAdapter(myAdapter);
+
     }
 
     private void clickEvents() {
