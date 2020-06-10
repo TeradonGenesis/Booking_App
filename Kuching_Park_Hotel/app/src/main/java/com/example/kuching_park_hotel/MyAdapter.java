@@ -60,16 +60,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         String price_string;
         String photo = room.getImage_link();
         String photo_url = url + "/" +  room.getId() + "/" + photo;
-        ArrayList<Rates> ratesArrayList = room.getSpecial_rates();
+
 
 
         Picasso.get().load(photo_url).into(holder.roomImage);
 
-        if(ratesArrayList.isEmpty()) {
-            holder.price.setText("RM".concat(String.format("%.2f", room.getPrice())));
-        } else {
-            holder.price.setText("RM".concat(String.format("%.2f", ratesArrayList.get(1).getRate())));
-        }
+
+        holder.price.setText("RM".concat(String.format("%.2f", room.getPrice())));
+
 
         holder.roomName.setText(room.getRoom_name());
         holder.noBeds.setText(room.getNo_beds());
@@ -106,7 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             String guests = roomArrayList.get(pos).getNo_guests();
             Double price = roomArrayList.get(pos).getPrice();
             String description = roomArrayList.get(pos).getDescription();
-            ArrayList<Rates> rates_listing = roomArrayList.get(pos).getSpecial_rates();
+
 
             int stocks = roomArrayList.get(pos).getStocks();
 

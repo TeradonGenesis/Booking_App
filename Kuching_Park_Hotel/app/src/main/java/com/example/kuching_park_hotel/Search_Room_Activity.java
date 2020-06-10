@@ -219,26 +219,7 @@ public class Search_Room_Activity extends AppCompatActivity {
 
                             Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("category"), jo.getDouble("base_Price"), jo.getString("noGuests"), jo.getInt("stocks"));
                             //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
-                            roomItem.setEb_discount(jo.getString("early_bird_discount"));
-                            roomItem.setEb_duration(jo.getString("early_bird_duration"));
 
-
-                            JSONArray ratesArray = jo.getJSONArray("special_rates");
-
-                            if(ratesArray.length() > 0) {
-                                for (int j = 0; j < ratesArray.length(); j++) {
-
-                                    JSONObject rates = ratesArray.getJSONObject(j);
-                                    Rates ratesItem = Rates.Builder.newInstance()
-                                            .set_Id(rates.getString("id"))
-                                            .set_Days(rates.getInt("days"))
-                                            .set_Rate(rates.getDouble("rate"))
-                                            .set_Start(rates.getString("start"))
-                                            .set_End(rates.getString("end"))
-                                            .build();
-                                    roomItem.getSpecial_rates().add(ratesItem);
-                                }
-                            }
                             rooms.add(roomItem);
                         }
 

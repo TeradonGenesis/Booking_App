@@ -11,14 +11,13 @@ public class Rates implements Parcelable {
     private Double rate;
     private String start, end;
 
-    public Rates(Builder builder){
-        this.id = builder.id;
-        this.rate = builder.rate;
-        this.days = builder.days;
-        this.start = builder.start;
-        this.end = builder.end;
+    public Rates(String id, int days, Double rate, String start, String end) {
+        this.id = id;
+        this.days = days;
+        this.rate = rate;
+        this.start = start;
+        this.end = end;
     }
-
 
     protected Rates(Parcel in) {
         id = in.readString();
@@ -98,6 +97,7 @@ public class Rates implements Parcelable {
         dest.writeString(end);
     }
 
+    /*
     public static class Builder{
 
         private String id;
@@ -139,6 +139,6 @@ public class Rates implements Parcelable {
             return new Rates(this);
         }
 
-    }
+    }*/
 
 }

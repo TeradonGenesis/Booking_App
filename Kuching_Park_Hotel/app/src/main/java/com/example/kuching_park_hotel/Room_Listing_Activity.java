@@ -66,7 +66,11 @@ public class Room_Listing_Activity extends AppCompatActivity {
     public void getBundle() {
         ArrayList<Room> rooms = new ArrayList<Room>();
         if((rooms = getIntent().getParcelableArrayListExtra("rooms")) != null) {
-           
+            for (Room room : rooms){
+                Log.i("Room: ", room.getRoom_name());
+            }
+            myAdapter = new MyAdapter(rooms);
+            recyclerView.setAdapter(myAdapter);
         }
     }
 

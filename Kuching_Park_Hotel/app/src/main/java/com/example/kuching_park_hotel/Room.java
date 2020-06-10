@@ -17,7 +17,11 @@ import java.util.Locale;
 
 public class Room implements Parcelable {
 
-    private String id, image_link, room_name, no_beds, description;
+    private String id;
+    private String image_link;
+    private String room_name;
+    private String no_beds;
+    private String description;
     private Double price;
     private String no_guests;
     private String eb_discount;
@@ -25,60 +29,7 @@ public class Room implements Parcelable {
     private int stocks;
     private String sub_image1;
     private String sub_image2;
-    private ArrayList<Rates> special_rates = new ArrayList<>();
-
-
-    /*
-    public Room(Builder builder) {
-        this.id = builder.id;
-        this.image_link = builder.image_link;
-        this.room_name = builder.room_name;
-        this.price = builder.price;
-        this.no_beds = builder.no_beds;
-        this.no_guests = builder.no_guests;
-        this.description = builder.description;
-        this.eb_discount = builder.eb_discount;
-        this.eb_duration = builder.eb_duration;
-        this.stocks = builder.stocks;
-        this.sub_image1 = builder.sub_image1;
-        this.sub_image2 = builder.sub_image2;
-        this.special_rates = builder.special_rates;
-
-    }
-     */
-
-
-    protected Room(Parcel in) {
-        id = in.readString();
-        image_link = in.readString();
-        room_name = in.readString();
-        no_beds = in.readString();
-        description = in.readString();
-        if (in.readByte() == 0) {
-            price = null;
-        } else {
-            price = in.readDouble();
-        }
-        no_guests = in.readString();
-        eb_discount = in.readString();
-        eb_duration = in.readString();
-        stocks = in.readInt();
-        sub_image1 = in.readString();
-        sub_image2 = in.readString();
-        special_rates = in.createTypedArrayList(Rates.CREATOR);
-    }
-
-    public static final Creator<Room> CREATOR = new Creator<Room>() {
-        @Override
-        public Room createFromParcel(Parcel in) {
-            return new Room(in);
-        }
-
-        @Override
-        public Room[] newArray(int size) {
-            return new Room[size];
-        }
-    };
+    private ArrayList<Rates> ratesArrayList = new ArrayList<>();
 
     public Room(String id, String image_link, String room_name, String no_beds, Double price, String no_guests, int stocks) {
         this.id = id;
@@ -131,7 +82,11 @@ public class Room implements Parcelable {
         return stocks;
     }
 
-    /*
+    public ArrayList<Rates> getRatesArrayList() {
+        return ratesArrayList;
+    }
+
+/*
     public String getSub_image1() {
         return sub_image1;
     }
@@ -140,12 +95,11 @@ public class Room implements Parcelable {
         return sub_image2;
     }*/
 
-    public ArrayList<Rates> getSpecial_rates() {
-        return special_rates;
+    //setters
+    public void setRatesArrayList(ArrayList<Rates> ratesArrayList) {
+        this.ratesArrayList = ratesArrayList;
     }
 
-
-    //setters
     public void setId(String id) {
         this.id = id;
     }
@@ -186,17 +140,17 @@ public class Room implements Parcelable {
         this.stocks = stocks;
     }
 
-    /*
-    public void setSub_image1(String sub_image1) {
-        this.sub_image1 = sub_image1;
-    }
 
-    public void setSub_image2(String sub_image2) {
-        this.sub_image2 = sub_image2;
-    }*/
 
-    public void setSpecial_rates(ArrayList<Rates> special_rates) {
-        this.special_rates = special_rates;
+    protected Room(Parcel in) {
+        id = in.readString();
+        image_link = in.readString();
+        room_name = in.readString();
+        no_beds = in.readString();
+        price = in.readDouble();
+        no_guests = in.readString();
+        stocks = in.readInt();
+        in.readTypedList(ratesArrayList, Rates.CREATOR);
     }
 
     @Override
@@ -204,7 +158,6 @@ public class Room implements Parcelable {
         return 0;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
@@ -213,98 +166,20 @@ public class Room implements Parcelable {
         dest.writeString(no_beds);
         dest.writeDouble(price);
         dest.writeString(no_guests);
-        dest.writeString(description);
-        dest.writeString(eb_discount);
-        dest.writeString(eb_duration);
         dest.writeInt(stocks);
-        dest.writeParcelableList(special_rates, flags);
+        dest.writeTypedList(ratesArrayList);
     }
 
-    /*
-    public static class Builder {
-        private String id, image_link, room_name, no_beds, description;
-        private Double price;
-        private String no_guests;
-        private String eb_discount;
-        private String eb_duration;
-        private int stocks;
-        private String sub_image1;
-        private String sub_image2;
-        private ArrayList<Rates> special_rates;
-
-        public static Builder newInstance() {
-            return new Builder();
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Room> CREATOR = new Parcelable.Creator<Room>() {
+        @Override
+        public Room createFromParcel(Parcel in) {
+            return new Room(in);
         }
 
-        public Builder set_Id(String id) {
-            this.id = id;
-            return this;
+        @Override
+        public Room[] newArray(int size) {
+            return new Room[size];
         }
-
-        public Builder setImage_Link(String image_link) {
-            this.image_link = image_link;
-            return this;
-        }
-
-        public Builder setRoom_Name(String room_name) {
-            this.room_name = room_name;
-            return this;
-        }
-
-        public Builder setNo_Beds(String no_beds) {
-            this.no_beds = no_beds;
-            return this;
-        }
-
-        public Builder set_Description(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Builder setPrice(Double price) {
-            this.price = price;
-            return this;
-        }
-
-        public Builder setNo_Guests(String no_guests) {
-            this.no_guests = no_guests;
-            return this;
-        }
-
-        public Builder setEb_discount(String eb_discount) {
-            this.eb_discount = eb_discount;
-            return this;
-        }
-
-        public Builder setEb_duration(String eb_duration) {
-            this.eb_duration = eb_duration;
-            return this;
-        }
-
-        public Builder setStocks(int stocks) {
-            this.stocks = stocks;
-            return this;
-        }
-
-        public Builder setSub_image1(String sub_image1) {
-            this.sub_image1 = sub_image1;
-            return this;
-        }
-
-        public Builder setSub_image2(String sub_image2) {
-            this.sub_image2 = sub_image2;
-            return this;
-        }
-
-        public Builder setSpecial_Rates(ArrayList<Rates> special_rates) {
-            this.special_rates = special_rates;
-            return this;
-        }
-
-
-
-        public Room build() {
-            return new Room(this);
-        }
-    }*/
+    };
 }
