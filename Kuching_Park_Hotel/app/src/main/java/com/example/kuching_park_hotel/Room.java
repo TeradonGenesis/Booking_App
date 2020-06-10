@@ -1,5 +1,12 @@
 package com.example.kuching_park_hotel;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class Room {
+
+public class Room implements Parcelable {
 
     private String id, image_link, room_name, no_beds, description;
     private Double price;
@@ -39,6 +47,48 @@ public class Room {
     }
      */
 
+
+    protected Room(Parcel in) {
+        id = in.readString();
+        image_link = in.readString();
+        room_name = in.readString();
+        no_beds = in.readString();
+        description = in.readString();
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+        no_guests = in.readString();
+        eb_discount = in.readString();
+        eb_duration = in.readString();
+        stocks = in.readInt();
+        sub_image1 = in.readString();
+        sub_image2 = in.readString();
+        special_rates = in.createTypedArrayList(Rates.CREATOR);
+    }
+
+    public static final Creator<Room> CREATOR = new Creator<Room>() {
+        @Override
+        public Room createFromParcel(Parcel in) {
+            return new Room(in);
+        }
+
+        @Override
+        public Room[] newArray(int size) {
+            return new Room[size];
+        }
+    };
+
+    public Room(String id, String image_link, String room_name, String no_beds, Double price, String no_guests, int stocks) {
+        this.id = id;
+        this.image_link = image_link;
+        this.room_name = room_name;
+        this.no_beds = no_beds;
+        this.price = price;
+        this.no_guests = no_guests;
+        this.stocks = stocks;
+    }
 
     //getters
     public String getId() {
@@ -147,6 +197,27 @@ public class Room {
 
     public void setSpecial_rates(ArrayList<Rates> special_rates) {
         this.special_rates = special_rates;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(image_link);
+        dest.writeString(room_name);
+        dest.writeString(no_beds);
+        dest.writeDouble(price);
+        dest.writeString(no_guests);
+        dest.writeString(description);
+        dest.writeString(eb_discount);
+        dest.writeString(eb_duration);
+        dest.writeInt(stocks);
+        dest.writeParcelableList(special_rates, flags);
     }
 
     /*

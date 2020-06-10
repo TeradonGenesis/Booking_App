@@ -21,6 +21,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.util.Pair;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -29,7 +30,12 @@ import android.widget.Toast;
 
 import com.example.kuching_park_hotel.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +55,7 @@ public class Search_Room_Activity extends AppCompatActivity {
     private int nights, room_qty = 1, guest_qty = 1;
     private RequestQueue requestQueue;
     private Button btn_check;
+    private ArrayList<Room> rooms = new ArrayList<Room>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,12 +203,60 @@ public class Search_Room_Activity extends AppCompatActivity {
 
     //Function to perform a POST function
     public void checkAvailability(final String check_in, final String check_out, final int nights, final int qty, final int guests) {
-        String url = "http://192.168.43.136/API/search_room_api.php";
+        String url = "http://10.0.2.2/API/search_room_api.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                send_availability(check_in, check_out, nights, qty, guests);
+                try {
+
+                    JSONArray array = new JSONArray(response);
+
+                    if(array.length() > 0) {
+                        for (int i = 0; i < array.length(); i++) {
+
+                            JSONObject jo = array.getJSONObject(i);
+
+                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("category"), jo.getDouble("base_Price"), jo.getString("noGuests"), jo.getInt("stocks"));
+                            //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
+                            roomItem.setEb_discount(jo.getString("early_bird_discount"));
+                            roomItem.setEb_duration(jo.getString("early_bird_duration"));
+
+
+                            JSONArray ratesArray = jo.getJSONArray("special_rates");
+
+                            if(ratesArray.length() > 0) {
+                                for (int j = 0; j < ratesArray.length(); j++) {
+
+                                    JSONObject rates = ratesArray.getJSONObject(j);
+                                    Rates ratesItem = Rates.Builder.newInstance()
+                                            .set_Id(rates.getString("id"))
+                                            .set_Days(rates.getInt("days"))
+                                            .set_Rate(rates.getDouble("rate"))
+                                            .set_Start(rates.getString("start"))
+                                            .set_End(rates.getString("end"))
+                                            .build();
+                                    roomItem.getSpecial_rates().add(ratesItem);
+                                }
+                            }
+                            rooms.add(roomItem);
+                        }
+
+                        for (Room room : rooms){
+                            Log.i("Room: ", room.getRoom_name());
+                        }
+
+                        send_availability();
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No rooms available", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
@@ -223,15 +278,10 @@ public class Search_Room_Activity extends AppCompatActivity {
         requestQueue.add(MyStringRequest);
     }
 
-    public void send_availability(String check_in, String check_out, int nights, int qty, int guests) {
+    public void send_availability() {
         Intent intent = new Intent(Search_Room_Activity.this, Room_Listing_Activity.class);
-        Bundle availability = new Bundle();
-        availability.putString("check_in", check_in);
-        availability.putString("check_out", check_out);
-        availability.putInt("nights",nights);
-        availability.putInt("qty", qty);
-        availability.putInt("guests", guests);
-        intent.putExtras(availability);
+
+        intent.putParcelableArrayListExtra("rooms", rooms);
         startActivity(intent);
     }
 

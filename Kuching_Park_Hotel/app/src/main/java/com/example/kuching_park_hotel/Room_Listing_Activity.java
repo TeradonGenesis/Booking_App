@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,10 +36,9 @@ public class Room_Listing_Activity extends AppCompatActivity {
     private TextView textView_duration, textView_room_qty;
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
-    private ArrayList<Room> rooms = new ArrayList<Room>();
     private MyAdapter myAdapter;
     private CardView cardView_filter;
-    private static final String URL_DATA = "http://192.168.43.136/API/search_room_api.php";
+    private static final String URL_DATA = "http://10.0.2.2/API/search_room_api.php";
     private String checkin, checkout;
     private int nights, qty, guests;
 
@@ -51,8 +51,8 @@ public class Room_Listing_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         requestQueue = MySingleton.getInstance(getApplicationContext()).getRequestQueue();
         initUI();
-        loadUrlData();
         clickEvents();
+        getBundle();
     }
 
     public void initUI() {
@@ -64,14 +64,10 @@ public class Room_Listing_Activity extends AppCompatActivity {
     }
 
     public void getBundle() {
-        Bundle availability = getIntent().getExtras();
-        checkin = availability.getString("check_in");
-        checkout = availability.getString("check_out");
-        nights = availability.getInt("nights");
-        qty = availability.getInt("qty");
-        guests = availability.getInt("guests");
-
-
+        ArrayList<Room> rooms = new ArrayList<Room>();
+        if((rooms = getIntent().getParcelableArrayListExtra("rooms")) != null) {
+           
+        }
     }
 
     private void clickEvents() {
@@ -84,7 +80,9 @@ public class Room_Listing_Activity extends AppCompatActivity {
         });
     }
 
+
     //Function to obtain perform GET function from the API and load them into the object class to be displayed in the recycler view list
+    /*
     private void loadUrlData() {
 
         if(rooms != null) {
@@ -97,6 +95,7 @@ public class Room_Listing_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();*/
 
+    /*
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_DATA, new Response.Listener<String>() {
             @Override
@@ -104,7 +103,7 @@ public class Room_Listing_Activity extends AppCompatActivity {
 
                 /*progressDialog.dismiss();*/
 
-
+/*
                 try {
 
                     JSONArray array = new JSONArray(response);
@@ -168,6 +167,6 @@ public class Room_Listing_Activity extends AppCompatActivity {
         });
 
         requestQueue.add(stringRequest);
-    }
+    }*/
 
 }
