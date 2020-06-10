@@ -271,8 +271,14 @@ public class Search_Room_Activity extends AppCompatActivity {
 
     public void send_availability() {
         Intent intent = new Intent(Search_Room_Activity.this, Room_Listing_Activity.class);
-
-        intent.putParcelableArrayListExtra("rooms", rooms);
+        Bundle bundle = new Bundle();
+        bundle.putString("check_in", check_in);
+        bundle.putString("check_out", check_out);
+        bundle.putInt("nights", nights);
+        bundle.putInt("qty", room_qty);
+        bundle.putInt("guests", guest_qty);
+        bundle.putParcelableArrayList("rooms", rooms);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

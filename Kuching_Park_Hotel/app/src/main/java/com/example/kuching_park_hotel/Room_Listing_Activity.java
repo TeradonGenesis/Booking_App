@@ -29,7 +29,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class Room_Listing_Activity extends AppCompatActivity {
 
@@ -54,6 +58,11 @@ public class Room_Listing_Activity extends AppCompatActivity {
         initUI();
         clickEvents();
         getBundle();
+        try {
+            setText();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initUI() {
@@ -64,6 +73,20 @@ public class Room_Listing_Activity extends AppCompatActivity {
         textView_room_qty = findViewById(R.id.textView_room_qty);
     }
 
+    public void setText() throws ParseException {
+
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        SimpleDateFormat format2 = new SimpleDateFormat("dd MMM yy", Locale.US);
+
+        Date date1 = format1.parse(checkin);
+        Date date2 = format1.parse(checkout);
+
+        String duration = format2.format(date1) + " - " + format2.format(date2) + ", "  + String.valueOf(nights) + " nights";
+        String room_qty = String.valueOf(qty) + " rooms, " + String.valueOf(guests) + " guests";
+        textView_duration.setText(duration);
+        textView_room_qty.setText(room_qty);
+    }
+
     public void getBundle() {
 
         if(rooms != null) {
@@ -71,7 +94,14 @@ public class Room_Listing_Activity extends AppCompatActivity {
         } else {
             rooms = new ArrayList<Room>();
         }
-        rooms = getIntent().getParcelableArrayListExtra("rooms");
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        checkin = bundle.getString("check_in");
+        checkout = bundle.getString("check_out");
+        nights = bundle.getInt("nights");
+        qty = bundle.getInt("qty");
+        guests = bundle.getInt("guests");
+        rooms = bundle.getParcelableArrayList("rooms");
         myAdapter = new MyAdapter(rooms);
         recyclerView.setAdapter(myAdapter);
 
