@@ -219,6 +219,16 @@ public class Search_Room_Activity extends AppCompatActivity {
 
                             Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("category"), jo.getDouble("base_Price"), jo.getString("noGuests"), jo.getInt("stocks"));
                             //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
+                            JSONArray ratesArray = jo.getJSONArray("special_rates");
+
+                            if(ratesArray.length() > 0) {
+                                for (int j = 0; j < ratesArray.length(); j++) {
+
+                                    JSONObject rates = ratesArray.getJSONObject(j);
+                                    Rates ratesItem = new Rates(rates.getString("id"), rates.getInt("days"), rates.getDouble("rate"), rates.getString("start"), rates.getString("end"));
+                                    roomItem.getRatesArrayList().add(ratesItem);
+                                }
+                            }
 
                             rooms.add(roomItem);
                         }

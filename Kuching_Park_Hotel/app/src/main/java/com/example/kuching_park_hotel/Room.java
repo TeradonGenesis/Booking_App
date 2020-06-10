@@ -150,7 +150,7 @@ public class Room implements Parcelable {
         price = in.readDouble();
         no_guests = in.readString();
         stocks = in.readInt();
-        in.readTypedList(ratesArrayList, Rates.CREATOR);
+        in.readTypedList(ratesArrayList ,Rates.CREATOR);
     }
 
     @Override

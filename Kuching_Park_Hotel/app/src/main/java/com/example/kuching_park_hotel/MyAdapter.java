@@ -60,15 +60,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         String price_string;
         String photo = room.getImage_link();
         String photo_url = url + "/" +  room.getId() + "/" + photo;
+        ArrayList<Rates> ratesArrayList = room.getRatesArrayList();
 
 
 
         Picasso.get().load(photo_url).into(holder.roomImage);
 
 
-        holder.price.setText("RM".concat(String.format("%.2f", room.getPrice())));
-
-
+        if(ratesArrayList.isEmpty()) {
+            holder.price.setText("RM".concat(String.format("%.2f", room.getPrice())));
+        } else {
+            holder.price.setText("RM".concat(String.format("%.2f", ratesArrayList.get(1).getRate())));
+        }
+        
         holder.roomName.setText(room.getRoom_name());
         holder.noBeds.setText(room.getNo_beds());
         holder.noGuests.setText(String.valueOf(room.getNo_guests()).concat(" guests"));

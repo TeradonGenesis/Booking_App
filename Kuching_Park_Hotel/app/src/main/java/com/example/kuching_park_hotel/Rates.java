@@ -22,11 +22,7 @@ public class Rates implements Parcelable {
     protected Rates(Parcel in) {
         id = in.readString();
         days = in.readInt();
-        if (in.readByte() == 0) {
-            rate = null;
-        } else {
-            rate = in.readDouble();
-        }
+        rate = in.readDouble();
         start = in.readString();
         end = in.readString();
     }
