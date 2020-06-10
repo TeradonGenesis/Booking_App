@@ -170,7 +170,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                 Map<String, String> MyData = new HashMap<String, String>();
                 MyData.put("check_in", check_in);
                 MyData.put("check_out", check_out);
-                MyData.put("nights", String.valueOf(nights);
+                MyData.put("nights", String.valueOf(nights));
                 MyData.put("qty", String.valueOf(qty));
                 MyData.put("guests", String.valueOf(guests));
                 return MyData;
