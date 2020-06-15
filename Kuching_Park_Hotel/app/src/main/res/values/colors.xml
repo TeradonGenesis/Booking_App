@@ -17,5 +17,6 @@
     <color name="dark_grey">#707070</color>
     <color name="tab_bg">#FAFAFA</color>
     <color name="yellowgreen">#ADFF2F</color>
+    <color name="bg_grey">#F4F6FA</color>
 
 </resources>
