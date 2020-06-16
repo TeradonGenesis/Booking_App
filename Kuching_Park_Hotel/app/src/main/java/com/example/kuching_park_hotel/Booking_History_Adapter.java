@@ -37,7 +37,7 @@ public class Booking_History_Adapter extends RecyclerView.Adapter<Booking_Histor
         Booking_History booking = bookingList.get(position);
         String checkin = booking.getCheck_in().toString();
         String checkout = booking.getCheck_out().toString();
-        String date = checkin + "=" + checkout;
+        String date = checkin + "-" + checkout;
         holder.textview_Room.setText(booking.getRoom_name());
         holder.textview_Date.setText(date);
         holder.textview_Price.setText(String.valueOf(booking.getTotal()));

@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +43,7 @@ public class Booking_History_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_booking__history_, container, false);
         requestQueue = MySingleton.getInstance(getActivity().getApplicationContext()).getRequestQueue();
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         initUI(v);
         loadUrlData();
         return v;
@@ -50,7 +52,7 @@ public class Booking_History_Fragment extends Fragment {
     private void initUI(View v) {
         recyclerView = v.findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        DividerItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        DividerItemDecoration divider = new DividerItemDecoration(getActivity().getApplicationContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(divider);
     }
 
@@ -62,11 +64,8 @@ public class Booking_History_Fragment extends Fragment {
             history = new ArrayList<Booking_History>();
         }
 
-        /*final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();*/
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -88,7 +87,7 @@ public class Booking_History_Fragment extends Fragment {
                             int booking_id = jo.getInt("booking_id");
                             BigInteger check_in = BigDecimal.valueOf(jo.getDouble("check_in")).toBigInteger();
                             BigInteger check_out = BigDecimal.valueOf(jo.getDouble("check_out")).toBigInteger();
-                            String room_name = jo.getString("name");
+                            String room_name = jo.getString("room_name");
                             float total = BigDecimal.valueOf(jo.getDouble("total")).floatValue();
                             Booking_History bookingHistory = new Booking_History(booking_id,check_in,check_out,room_name,total);
 
@@ -96,8 +95,8 @@ public class Booking_History_Fragment extends Fragment {
                         }
                         historyAdapter = new Booking_History_Adapter(history);
                         recyclerView.setAdapter(historyAdapter);
-
-
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "No history found", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -109,11 +108,13 @@ public class Booking_History_Fragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getContext(), "Error! Internet Connection required", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Internet connection required", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
 
             }
         });
 
         requestQueue.add(stringRequest);
     }
+
 }

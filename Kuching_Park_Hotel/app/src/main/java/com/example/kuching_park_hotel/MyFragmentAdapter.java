@@ -10,7 +10,7 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
 
     public MyFragmentAdapter(FragmentManager fm) {
         super(fm);
-        childFragments = new Fragment[]{new Mainpage_Fragment(), new Enquiry_Fragment(), new Map_Fragment()};
+        childFragments = new Fragment[]{new Mainpage_Fragment(), new Booking_History_Fragment(), new Map_Fragment()};
     }
 
     @Override
