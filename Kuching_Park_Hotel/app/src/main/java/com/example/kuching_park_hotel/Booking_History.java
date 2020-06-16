@@ -40,6 +40,14 @@ public class Booking_History {
         this.total = total;
     }
 
+    public Booking_History(int booking_id, BigInteger check_in, BigInteger check_out, String room_name, float total) {
+        this.booking_id = booking_id;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.room_name = room_name;
+        this.total = total;
+    }
+
     public int getBooking_id() {
         return booking_id;
     }
