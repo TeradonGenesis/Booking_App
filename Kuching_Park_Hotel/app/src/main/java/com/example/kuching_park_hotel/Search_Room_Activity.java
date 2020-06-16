@@ -69,6 +69,11 @@ public class Search_Room_Activity extends AppCompatActivity {
         setDefault();
         dateRangeCalender();
         clickEvents();
+        if(rooms != null) {
+            rooms.clear();
+        } else {
+            rooms = new ArrayList<Room>();
+        }
 
     }
 
@@ -217,7 +222,7 @@ public class Search_Room_Activity extends AppCompatActivity {
 
                             JSONObject jo = array.getJSONObject(i);
 
-                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("category"), jo.getDouble("base_Price"), jo.getString("noGuests"), jo.getInt("stocks"));
+                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("category"), jo.getDouble("base_Price"), jo.getString("noGuests"), jo.getInt("stocks"), jo.getString("check_in"), jo.getString("check_out"), jo.getInt("room_qty"), jo.getInt("nights"));
                             //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
                             JSONArray ratesArray = jo.getJSONArray("special_rates");
 
@@ -234,7 +239,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                         }
 
                         for (Room room : rooms){
-                            Log.i("Room: ", room.getRoom_name());
+                            Log.i("Room: ", String.valueOf(room.get_Nights()) + room.getRoom_name() + room.getCheck_in() + room.getCheck_out() + room.getRoom_qty());
                         }
 
                         send_availability();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private String url = "http://10.0.2.2/r2g/files/room_type/image/";
     private ArrayList<Room> roomArrayList;
+    private String check_in, check_out;
+    private int nights, qty;
 
-    public MyAdapter(ArrayList<Room> roomArrayList) {
+    public MyAdapter(ArrayList<Room> roomArrayList, String check_in, String check_out, int nights, int qty) {
         this.roomArrayList = roomArrayList;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.nights = nights;
+        this.qty = qty;
     }
 
     @NonNull
@@ -111,7 +118,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             int stocks = roomArrayList.get(pos).getStocks();
             ArrayList<Rates> ratesArrayList =  roomArrayList.get(pos).getRatesArrayList();
 
-
             String image_url = url + "/" +  roomArrayList.get(pos).getId() + "/" + image;
 
             Intent intent = new Intent(v.getContext(), Room_Info_Activity.class);
@@ -124,6 +130,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             detail_bundle.putString("description", description);
             detail_bundle.putDouble("price", price);
             detail_bundle.putInt("stocks", stocks);
+            detail_bundle.putString("check_in", check_in);
+            detail_bundle.putString("check_out", check_out);
+            detail_bundle.putInt("room_qty", qty);
+            detail_bundle.putInt("nights", nights);
             detail_bundle.putParcelableArrayList("special_rates", ratesArrayList);
 
             intent.putExtras(detail_bundle);

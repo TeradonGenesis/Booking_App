@@ -83,7 +83,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/editText_norooms"
                 app:layout_constraintBottom_toBottomOf="@id/editText_norooms"/>
-
+<!--
             <ImageButton
                 android:id="@+id/imageButton_up"
                 android:layout_width="40dp"
@@ -107,13 +107,15 @@
                 app:layout_constraintStart_toEndOf="@id/imageButton_up"
                 app:layout_constraintTop_toTopOf="@id/imageButton_up"/>
 
+                -->
+
             <View
                 android:id="@+id/divider4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/grey_line"
-                app:layout_constraintTop_toBottomOf="@id/imageButton_up"
+                app:layout_constraintTop_toBottomOf="@id/textView_noRooms_title"
                 tools:layout_editor_absoluteX="20dp" />
 
             <TextView
@@ -180,7 +182,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider5"/>
-
+<!--
             <EditText
                 android:id="@+id/editText_full_name"
                 android:layout_width="match_parent"
@@ -228,7 +230,7 @@
                 app:layout_constraintTop_toBottomOf="@id/editText_booking_email"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
-
+-->
             <Button
                 android:id="@+id/button_confirm"
                 android:layout_width="match_parent"
@@ -239,7 +241,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editText_booking_phone"/>
+                app:layout_constraintTop_toBottomOf="@id/divider5"/>
 
             <Button
                 android:id="@+id/button_cancel"

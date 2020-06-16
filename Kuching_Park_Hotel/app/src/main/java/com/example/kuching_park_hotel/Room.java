@@ -27,11 +27,15 @@ public class Room implements Parcelable {
     private String eb_discount;
     private String eb_duration;
     private int stocks;
+    private String check_in;
+    private String check_out;
+    private int room_qty;
+    private int nights;
     private String sub_image1;
     private String sub_image2;
     private ArrayList<Rates> ratesArrayList = new ArrayList<>();
 
-    public Room(String id, String image_link, String room_name, String no_beds, Double price, String no_guests, int stocks) {
+    public Room(String id, String image_link, String room_name, String no_beds, Double price, String no_guests, int stocks, String check_in, String check_out, int room_qty, int nights) {
         this.id = id;
         this.image_link = image_link;
         this.room_name = room_name;
@@ -39,6 +43,10 @@ public class Room implements Parcelable {
         this.price = price;
         this.no_guests = no_guests;
         this.stocks = stocks;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.room_qty = room_qty;
+        this.nights = nights;
     }
 
     //getters
@@ -80,6 +88,22 @@ public class Room implements Parcelable {
 
     public int getStocks() {
         return stocks;
+    }
+
+    public String getCheck_in() {
+        return check_in;
+    }
+
+    public String getCheck_out() {
+        return check_out;
+    }
+
+    public int getRoom_qty() {
+        return room_qty;
+    }
+
+    public int get_Nights() {
+        return nights;
     }
 
     public ArrayList<Rates> getRatesArrayList() {

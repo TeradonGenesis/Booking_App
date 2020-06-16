@@ -57,12 +57,22 @@ public class Room_Listing_Activity extends AppCompatActivity {
         requestQueue = MySingleton.getInstance(getApplicationContext()).getRequestQueue();
         initUI();
         clickEvents();
+        if(rooms != null) {
+            rooms.clear();
+        } else {
+            rooms = new ArrayList<Room>();
+        }
         getBundle();
         try {
             setText();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, Search_Room_Activity.class));
     }
 
     public void initUI() {
@@ -89,11 +99,6 @@ public class Room_Listing_Activity extends AppCompatActivity {
 
     public void getBundle() {
 
-        if(rooms != null) {
-            rooms.clear();
-        } else {
-            rooms = new ArrayList<Room>();
-        }
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         checkin = bundle.getString("check_in");
@@ -102,7 +107,8 @@ public class Room_Listing_Activity extends AppCompatActivity {
         qty = bundle.getInt("qty");
         guests = bundle.getInt("guests");
         rooms = bundle.getParcelableArrayList("rooms");
-        myAdapter = new MyAdapter(rooms);
+        myAdapter = new MyAdapter(rooms, checkin, checkout, nights, qty);
+        myAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(myAdapter);
 
     }
