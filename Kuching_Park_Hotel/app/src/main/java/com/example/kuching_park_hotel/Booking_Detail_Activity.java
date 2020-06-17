@@ -24,13 +24,13 @@ import java.util.Map;
 
 public class Booking_Detail_Activity extends AppCompatActivity {
 
-    private TextView textView_roomName, textView_duration, textView_nights, textView_unit, textView_subtotal, textView_total;
+    private TextView textView_roomName, textView_duration, textView_nights, textView_unit, textView_subtotal, textView_total, textView_total_rooms_price;
     private EditText editText_customer_name, editText_customer_phone, editText_customer_email, editText_norooms;
     private Button btn_confirm, btn_cancel;
     private ImageButton imgBtn_up, imgBtn_down;
     private int room_no = 1, difference, room_qty;
     private String  room_id, name, checkin, checkout, unit_string, price_string;
-    private Double price = 0.00, total_price = 0.00;
+    private Double price = 0.00, total_price = 0.00,sum_total = 0.00;
     private RequestQueue requestQueue;
     private HashMap<Double, Integer> rates_map = new HashMap<>();
 
@@ -53,6 +53,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         textView_unit = findViewById(R.id.textView_unit);
         textView_subtotal = findViewById(R.id.textView_subtotal);
         textView_total = findViewById(R.id.textView_total_price);
+        textView_total_rooms_price = findViewById(R.id.textView_total_rooms_price);
         editText_norooms = findViewById(R.id.editText_norooms);
         btn_confirm = findViewById(R.id.button_confirm);
         btn_cancel = findViewById(R.id.button_cancel);
@@ -96,15 +97,17 @@ public class Booking_Detail_Activity extends AppCompatActivity {
             subtotal.append("RM ").append(rate.getKey() * rate.getValue()).append("0").append("\n\n");
             total_price += Double.valueOf(rate.getKey() * rate.getValue());
         }
-
+        sum_total = total_price * room_qty;
         String timeline = checkin + " - " + checkout;
         String nights = String.valueOf(difference).concat( " nights");
-        String total_summary = "RM " + String.valueOf(total_price) + "0";
+        String total_summary = "RM " + String.valueOf(sum_total) + "0";
+        String rooms_total = "RM " + String.valueOf(total_price) + "0" + " x " + String.valueOf(room_qty);
 
         textView_roomName.setText(name);
         textView_duration.setText(timeline);
         textView_nights.setText(nights);
 
+        textView_total_rooms_price.setText(rooms_total);
         textView_total.setText(total_summary);
         textView_unit.setText(unit.toString());
         textView_subtotal.setText(subtotal.toString());
@@ -143,7 +146,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
                 MyData.put("check_out", checkout);
                 MyData.put("nights", String.valueOf(difference));
                 MyData.put("room_qty", String.valueOf(room_qty));
-                MyData.put("total", String.valueOf(total_price));
+                MyData.put("total", String.valueOf(sum_total));
                 MyData.put("member_id", String.valueOf(34));
                 return MyData;
             }

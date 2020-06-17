@@ -140,6 +140,28 @@
                 app:layout_constraintTop_toTopOf="@id/textView_unit"/>
 
             <TextView
+                android:id="@+id/textView_no_rooms_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No of Rooms"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView_unit"/>
+
+            <TextView
+                android:id="@+id/textView_total_rooms_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RM400.00"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView_unit"/>
+
+            <TextView
                 android:id="@+id/textView_total_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,7 +171,7 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_unit"/>
+                app:layout_constraintTop_toBottomOf="@id/textView_no_rooms_total"/>
 
             <TextView
                 android:id="@+id/textView_total_price"
@@ -161,7 +183,7 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_unit"/>
+                app:layout_constraintTop_toBottomOf="@id/textView_total_rooms_price"/>
 
             <View
                 android:id="@+id/divider5"
