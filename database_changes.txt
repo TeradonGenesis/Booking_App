@@ -1,0 +1,1 @@
+early bird defaults should be zero

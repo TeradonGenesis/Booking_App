@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/bg_grey"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <ImageView
+        android:id="@+id/imageView_logo_booking"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView_booking_form_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"
+        android:text="Check out the rooms we have"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/imageView_logo_booking"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_chceck_in_out"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="2"
+        android:layout_rowWeight="1"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_booking_form_title">
+
+        <GridLayout
+            android:columnCount="3"
+            android:rowCount="1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textView11"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_checkin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_gravity="center"
+                android:layout_rowWeight="1"
+                >
+
+                <TextView
+                    android:id="@+id/textView_checkin_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check-in"
+                    android:textSize="12sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_checkin_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="27"
+                    android:textStyle="bold"
+                    android:textSize="42sp"
+                    android:layout_below="@id/textView_checkin_label">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_checkin_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tue"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14sp"
+                    android:layout_above="@id/textView_checkin_month"
+                    android:layout_toEndOf="@id/textView_checkin_date">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_checkin_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="May 20"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14sp"
+                    android:layout_alignBaseline="@id/textView_checkin_date"
+                    android:layout_toEndOf="@id/textView_checkin_date">
+
+                </TextView>
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_nights"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/imageView_arrow"
+                    android:src="@drawable/ic_baseline_arrow_forward_24"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView_nights_label"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="1 Nights"
+                    android:layout_below="@id/imageView_arrow"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_checkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_gravity="center"
+                android:layout_rowWeight="1"
+                >
+
+                <TextView
+                    android:id="@+id/textView_checkout_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check-out"
+                    android:textSize="12sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_checkout_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="28"
+                    android:textStyle="bold"
+                    android:textSize="42sp"
+                    android:layout_below="@id/textView_checkout_label">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_checkout_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wed"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14sp"
+                    android:layout_above="@id/textView_checkout_month"
+                    android:layout_toEndOf="@id/textView_checkout_date">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_checkout_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="May 20"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14sp"
+                    android:layout_alignBaseline="@id/textView_checkout_date"
+                    android:layout_toEndOf="@id/textView_checkout_date">
+
+                </TextView>
+
+
+            </RelativeLayout>
+
+
+        </GridLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_room_qty"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="2"
+        android:layout_rowWeight="1"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_chceck_in_out">
+
+        <GridLayout
+            android:columnCount="3"
+            android:rowCount="1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textView11"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_room_qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_gravity="center"
+                android:layout_rowWeight="1"
+                >
+
+
+
+                <TextView
+                    android:id="@+id/textView_room_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textStyle="bold"
+                    android:textSize="42sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_room_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="rooms"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_toEndOf="@id/textView_room_qty"
+                    android:layout_alignBaseline="@id/textView_room_qty">
+
+                </TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_room_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/imageView_room_plus"
+                    android:background="@drawable/plus"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_room_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_gravity="center"
+                android:layout_rowWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/imageView_room_minus"
+                    android:background="@drawable/minus"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+
+
+            </RelativeLayout>
+
+
+        </GridLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_guest_qty"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="2"
+        android:layout_rowWeight="1"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_room_qty">
+
+        <GridLayout
+            android:columnCount="3"
+            android:rowCount="1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textView11"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_guest_qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_gravity="center"
+                android:layout_rowWeight="1"
+                >
+
+
+
+                <TextView
+                    android:id="@+id/textView_guest_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textStyle="bold"
+                    android:textSize="42sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView_guest_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="guests"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_toEndOf="@id/textView_guest_qty"
+                    android:layout_alignBaseline="@id/textView_guest_qty">
+
+                </TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_guest_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/imageView_guest_plus"
+                    android:background="@drawable/plus"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_guest_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_gravity="center"
+                android:layout_rowWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/imageView_guest_minus"
+                    android:background="@drawable/minus"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+
+
+            </RelativeLayout>
+
+
+        </GridLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/light_green"
+        app:layout_constraintTop_toBottomOf="@id/card_guest_qty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

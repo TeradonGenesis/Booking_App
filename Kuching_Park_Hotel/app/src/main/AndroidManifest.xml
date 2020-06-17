@@ -17,7 +17,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Account_Creation_Activity"></activity>
+        <activity
+            android:name=".Room_Info_Activity"
+            android:label="@string/title_activity_room__info_"
+            android:parentActivityName=".Search_Room_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Room_Listing_Activity"
+            android:label="@string/title_activity_room__listing_"
+            android:parentActivityName=".Search_Room_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Search_Room_Activity"
+            android:label="@string/title_activity_search__room_"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FindRoom_Activity" />
+        <activity android:name=".Account_Creation_Activity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

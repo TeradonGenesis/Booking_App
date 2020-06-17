@@ -65,13 +65,49 @@ public class Room_Detail_Activity extends AppCompatActivity {
         String image = room_data.getString("image");
         name = room_data.getString("name");
         String beds = room_data.getString("beds");
-        int guests = room_data.getInt("guests");
+        String guests = room_data.getString("guests");
         String description = room_data.getString("description");
+
+        int stocks = room_data.getInt("stocks");
+
+        //tier 1
+        int t1_pr = room_data.getInt("t1_pr");
+        Double t1_price = room_data.getDouble("t1_price");
+        String t1_from = room_data.getString("t1_from");
+        String t1_to = room_data.getString("t1_to");
+
+        //tier 2
+        int t2_pr = room_data.getInt("t1_pr");
+        Double t2_price = room_data.getDouble("t1_price");
+        String t2_from = room_data.getString("t1_from");
+        String t2_to = room_data.getString("t1_to");
+
+        //tier 2
+        int t3_pr = room_data.getInt("t3_pr");
+        Double t3_price = room_data.getDouble("t3_price");
+        String t3_from = room_data.getString("t3_from");
+        String t3_to = room_data.getString("t3_to");
+
+        //tier 4
+        int t4_pr = room_data.getInt("t4_pr");
+        Double t4_price = room_data.getDouble("t4_price");
+
+        //tier 5
+        int t5_pr = room_data.getInt("t5_pr");
+        Double t5_price = room_data.getDouble("t5_price");
+
+        //tier 6
+        int t6_pr = room_data.getInt("t6_pr");
+        Double t6_price = room_data.getDouble("t6_price");
+
+        //tier 7
+        int t7_pr = room_data.getInt("t7_pr");
+        Double t7_price = room_data.getDouble("t7_price");
 
         String currency = "RM " + String.format("%.2f", price);
 
         Picasso.get().load(image).into(imageView_room);
-        textView_guests.setText(String.valueOf(guests).concat(" guests"));
+        textView_guests.setText(guests);
         textView_price.setText(currency);
         textView_name.setText(name);
         textView_description.setText(description);

@@ -31,7 +31,7 @@ public class Booking_Fragment extends Fragment {
     private RequestQueue requestQueue;
     private ArrayList<Room> rooms = new ArrayList<Room>();
     private MyAdapter myAdapter;
-    private static final String URL_DATA = "http://kuchingparkhotel.com.my/room_api.php";
+    private static final String URL_DATA = "http://192.168.1.5/API/room_api.php";
 
     public Booking_Fragment() {
         // Required empty public constructor
@@ -45,7 +45,7 @@ public class Booking_Fragment extends Fragment {
        View v = inflater.inflate(R.layout.fragment_booking_, container, false);
         requestQueue = MySingleton.getInstance(getActivity().getApplicationContext()).getRequestQueue();
        initUI(v);
-       loadUrlData();
+       /*loadUrlData();*/
        return v;
     }
 
@@ -56,6 +56,7 @@ public class Booking_Fragment extends Fragment {
     }
 
     //Function to obtain perform GET function from the API and load them into the object class to be displayed in the recycler view list
+    /*
     private void loadUrlData() {
 
         if(rooms != null) {
@@ -85,8 +86,41 @@ public class Booking_Fragment extends Fragment {
 
                         JSONObject jo = array.getJSONObject(i);
 
-                        Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getDouble("price"), jo.getString("beds"), jo.getInt("guest"), jo.getString("description"));
+                        Room roomItem= Room.Builder.newInstance()
+                                .set_Id(jo.getString("id"))
+                                .setImage_Link(jo.getString("image"))
+                                .setRoom_Name(jo.getString("name"))
+                                .setPrice(jo.getDouble("base_Price"))
+                                .setNo_Beds(jo.getString("category"))
+                                .setNo_Guests(jo.getString("noGuests"))
 
+                                //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
+                                .setEb_discount(jo.getString("early_bird_discount"))
+                                .setEb_duration(jo.getString("early_bird_duration"))
+                                .setStocks(jo.getInt("stocks"))
+                                .setSub_image1(jo.getString("sub_image1"))
+                                .setSub_image2(jo.getString("sub_image1"))
+                                .setT1_pr(jo.getInt("tier1_priority"))
+                                .setT1_price(jo.getDouble("tier1_Price"))
+                                .setT1_from(jo.getString("tier1_date_from"))
+                                .setT1_to(jo.getString("tier1_date_to"))
+                                .setT2_pr(jo.getInt("tier2_priority"))
+                                .setT2_price(jo.getDouble("tier2_Price"))
+                                .setT2_from(jo.getString("tier2_date_from"))
+                                .setT2_to(jo.getString("tier2_date_to"))
+                                .setT3_pr(jo.getInt("tier3_priority"))
+                                .setT3_price(jo.getDouble("tier3_Price"))
+                                .setT3_from(jo.getString("tier3_date_from"))
+                                .setT3_to(jo.getString("tier3_date_to"))
+                                .setT4_pr(jo.getInt("tier4_priority"))
+                                .setT4_price(jo.getDouble("tier4_Price"))
+                                .setT5_pr(jo.getInt("tier5_priority"))
+                                .setT5_price(jo.getDouble("tier5_priority"))
+                                .setT6_pr(jo.getInt("tier6_priority"))
+                                .setT6_price(jo.getDouble("tier6_priority"))
+                                .setT7_pr(jo.getInt("tier7_priority"))
+                                .setT7_price(jo.getDouble("tier7_priority"))
+                                .build();
                         rooms.add(roomItem);
                     }
 
@@ -108,6 +142,6 @@ public class Booking_Fragment extends Fragment {
         });
 
         requestQueue.add(stringRequest);
-    }
+    }*/
 
 }

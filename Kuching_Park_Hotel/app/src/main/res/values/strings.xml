@@ -18,4 +18,29 @@
     <string name="address_title">Address</string>
     <string name="address_content">Lot 606 Padungan Road, 93100 Kuching, Sarawak</string>
     <string name="getmap">Go to Google Map</string>
+
+    <string name="email_label">EMAIL</string>
+    <string name="room_label">ROOM TYPE</string>
+    <string name="no_rooms_label">NO OF ROOMS</string>
+    <string name="checkin_label">CHECK IN</string>
+    <string name="checkout_label">CHECK OUT</string>
+    <string name="name_label">NAME</string>
+    <string name="phone_label">PHONE</string>
+    <string name="book_label">BOOK A ROOM</string>
+    <string name="title_activity_room_detail">room_detail</string>
+    <string name="upcoming_booking">Upcoming Booking</string>
+    <string name="duration">Duration</string>
+    <string name="services">Services</string>
+    <string name="what_will_you_be_doing_today">What will you be doing today?</string>
+    <string name="title_activity_search__room_">Search_Room_Activity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_room__listing_">Room Listing</string>
+    <string name="title_activity_room__info_">Room Detail</string>
 </resources>

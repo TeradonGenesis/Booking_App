@@ -1,7 +1,10 @@
 package com.example.kuching_park_hotel;
 
 import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +17,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private String url = "http://kuchingparkhotel.com.my/photo";
+    private String url = "http://10.0.2.2/r2g/files/room_type/image/";
     private ArrayList<Room> roomArrayList;
+    private String check_in, check_out;
+    private int nights, qty;
 
-    public MyAdapter(ArrayList<Room> roomArrayList) {
+    public MyAdapter(ArrayList<Room> roomArrayList, String check_in, String check_out, int nights, int qty) {
         this.roomArrayList = roomArrayList;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.nights = nights;
+        this.qty = qty;
     }
 
     @NonNull
@@ -34,17 +49,40 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Room room = roomArrayList.get(position);
-        String price_string = String.format("%.2f", room.getPrice());
+
+        Double price = 0.00;
+        Date current = new Date();
+
+        /*
+        try {
+            price = room.getCurrentPricing(current);
+            String price_string = String.format("%.2f", price);
+            holder.price.setText("RM".concat(price_string));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
+        String price_string;
         String photo = room.getImage_link();
-        String photo_url = url + "/" + photo;
+        String photo_url = url + "/" +  room.getId() + "/" + photo;
+        ArrayList<Rates> ratesArrayList = room.getRatesArrayList();
+
+
+
         Picasso.get().load(photo_url).into(holder.roomImage);
 
+
+        if(ratesArrayList.isEmpty()) {
+            holder.price.setText("RM".concat(String.format("%.2f", room.getPrice())));
+        } else {
+            holder.price.setText("RM".concat(String.format("%.2f", ratesArrayList.get(0).getRate())));
+        }
+        
         holder.roomName.setText(room.getRoom_name());
         holder.noBeds.setText(room.getNo_beds());
         holder.noGuests.setText(String.valueOf(room.getNo_guests()).concat(" guests"));
-        holder.price.setText("RM".concat(price_string));
-
     }
 
     @Override
@@ -74,21 +112,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             String image = roomArrayList.get(pos).getImage_link();
             String name = roomArrayList.get(pos).getRoom_name();
             String beds = roomArrayList.get(pos).getNo_beds();
-            int guests = roomArrayList.get(pos).getNo_guests();
+            String guests = roomArrayList.get(pos).getNo_guests();
             Double price = roomArrayList.get(pos).getPrice();
             String description = roomArrayList.get(pos).getDescription();
+            int stocks = roomArrayList.get(pos).getStocks();
+            ArrayList<Rates> ratesArrayList =  roomArrayList.get(pos).getRatesArrayList();
 
-            String image_url = url + "/" + image;
+            String image_url = url + "/" +  roomArrayList.get(pos).getId() + "/" + image;
 
-            Intent intent = new Intent(v.getContext(), Room_Detail_Activity.class);
+            Intent intent = new Intent(v.getContext(), Room_Info_Activity.class);
             Bundle detail_bundle = new Bundle();
             detail_bundle.putString("id", id);
             detail_bundle.putString("image", image_url);
             detail_bundle.putString("name", name);
             detail_bundle.putString("beds", beds);
-            detail_bundle.putInt("guests", guests);
+            detail_bundle.putString("guests", guests);
             detail_bundle.putString("description", description);
             detail_bundle.putDouble("price", price);
+            detail_bundle.putInt("stocks", stocks);
+            detail_bundle.putString("check_in", check_in);
+            detail_bundle.putString("check_out", check_out);
+            detail_bundle.putInt("room_qty", qty);
+            detail_bundle.putInt("nights", nights);
+            detail_bundle.putParcelableArrayList("special_rates", ratesArrayList);
+
             intent.putExtras(detail_bundle);
             v.getContext().startActivity(intent);
         }

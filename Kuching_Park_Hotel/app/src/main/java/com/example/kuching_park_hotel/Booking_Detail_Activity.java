@@ -24,14 +24,15 @@ import java.util.Map;
 
 public class Booking_Detail_Activity extends AppCompatActivity {
 
-    private TextView textView_roomName, textView_duration, textView_nights, textView_unit, textView_subtotal, textView_total;
+    private TextView textView_roomName, textView_duration, textView_nights, textView_unit, textView_subtotal, textView_total, textView_total_rooms_price;
     private EditText editText_customer_name, editText_customer_phone, editText_customer_email, editText_norooms;
     private Button btn_confirm, btn_cancel;
     private ImageButton imgBtn_up, imgBtn_down;
-    private int room_no = 1, difference;
+    private int room_no = 1, difference, room_qty;
     private String  room_id, name, checkin, checkout, unit_string, price_string;
-    private Double price = 0.00, total_price = 0.00;
+    private Double price = 0.00, total_price = 0.00,sum_total = 0.00;
     private RequestQueue requestQueue;
+    private HashMap<Double, Integer> rates_map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         requestQueue = MySingleton.getInstance(getApplicationContext()).getRequestQueue();
         initUI();
         getBundle();
+        setText();
         clickEvents();
     }
 
@@ -51,14 +53,17 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         textView_unit = findViewById(R.id.textView_unit);
         textView_subtotal = findViewById(R.id.textView_subtotal);
         textView_total = findViewById(R.id.textView_total_price);
-        editText_customer_name = findViewById(R.id.editText_full_name);
-        editText_customer_phone = findViewById(R.id.editText_booking_phone);
-        editText_customer_email = findViewById(R.id.editText_booking_email);
+        textView_total_rooms_price = findViewById(R.id.textView_total_rooms_price);
         editText_norooms = findViewById(R.id.editText_norooms);
         btn_confirm = findViewById(R.id.button_confirm);
         btn_cancel = findViewById(R.id.button_cancel);
+        /*
         imgBtn_up =findViewById(R.id.imageButton_up);
         imgBtn_down = findViewById(R.id.imageButton_down);
+        editText_customer_name = findViewById(R.id.editText_full_name);
+        editText_customer_phone = findViewById(R.id.editText_booking_phone);
+        editText_customer_email = findViewById(R.id.editText_booking_email);
+         */
     }
 
     //Function to receive data from activity
@@ -66,34 +71,58 @@ public class Booking_Detail_Activity extends AppCompatActivity {
 
         Bundle room_data = getIntent().getExtras();
         room_id = room_data.getString("id");
-        price = room_data.getDouble("price");
         name = room_data.getString("name");
-        checkin = room_data.getString("checkin");
-        checkout = room_data.getString("checkout");
-        difference = room_data.getInt("difference");
+        checkin = room_data.getString("check_in");
+        checkout = room_data.getString("check_out");
+        difference = room_data.getInt("nights");
+        room_qty = room_data.getInt("room_qty");
+        rates_map = (HashMap<Double, Integer>) room_data.getSerializable("rates");
+/*
+        updatePrice();
 
+ */
+
+    }
+
+    public void setText() {
+
+        StringBuilder unit = new StringBuilder();
+        StringBuilder subtotal = new StringBuilder();
+
+
+
+
+        for(Map.Entry<Double, Integer> rate : rates_map.entrySet()) {
+            unit.append("RM ").append(rate.getKey()).append("0").append(" x ").append(rate.getValue()).append("\n\n");
+            subtotal.append("RM ").append(rate.getKey() * rate.getValue()).append("0").append("\n\n");
+            total_price += Double.valueOf(rate.getKey() * rate.getValue());
+        }
+        sum_total = total_price * room_qty;
         String timeline = checkin + " - " + checkout;
         String nights = String.valueOf(difference).concat( " nights");
+        String total_summary = "RM " + String.valueOf(sum_total) + "0";
+        String rooms_total = "RM " + String.valueOf(total_price) + "0" + " x " + String.valueOf(room_qty);
 
         textView_roomName.setText(name);
         textView_duration.setText(timeline);
         textView_nights.setText(nights);
 
-        updatePrice();
-
+        textView_total_rooms_price.setText(rooms_total);
+        textView_total.setText(total_summary);
+        textView_unit.setText(unit.toString());
+        textView_subtotal.setText(subtotal.toString());
+        editText_norooms.setText(String.valueOf(room_qty));
     }
 
     //Function to connect click events to the buttons
     public void clickEvents() {
         btn_confirm.setOnClickListener(new Click());
         btn_cancel.setOnClickListener(new Click());
-        imgBtn_up.setOnClickListener(new Click());
-        imgBtn_down.setOnClickListener(new Click());
     }
 
     //Function to perform a POST function
-    public void postEnquiry(final String room_id, final String roomName, final String checkin, final String checkout, final String nights, final String room_no, final String total, final String name, final String phone, final String email) {
-        String url = "http://kuchingparkhotel.com.my/mobile_booking.php";
+    public void postEnquiry() {
+        String url = "http://10.0.2.2/connections/android/post_booking.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -112,21 +141,20 @@ public class Booking_Detail_Activity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
                 MyData.put("room_id", room_id);
-                MyData.put("roomName", roomName);
-                MyData.put("checkin",checkin);
-                MyData.put("checkout", checkout);
-                MyData.put("nights", nights);
-                MyData.put("roomNo", room_no);
-                MyData.put("total", total);
                 MyData.put("name", name);
-                MyData.put("phone", phone);
-                MyData.put("email", email);
+                MyData.put("check_in",checkin);
+                MyData.put("check_out", checkout);
+                MyData.put("nights", String.valueOf(difference));
+                MyData.put("room_qty", String.valueOf(room_qty));
+                MyData.put("total", String.valueOf(sum_total));
+                MyData.put("member_id", String.valueOf(34));
                 return MyData;
             }
         };
         requestQueue.add(MyStringRequest);
     }
 
+    /*
     public void updatePrice() {
 
         total_price = price * difference * room_no;
@@ -137,7 +165,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         textView_subtotal.setText(price_string);
         textView_total.setText(price_string);
         editText_norooms.setText(String.valueOf(room_no));
-    }
+    }*/
 
     public void send_status(String message, String btn_message) {
         Intent intent = new Intent(Booking_Detail_Activity.this, Booking_Success.class);
@@ -157,6 +185,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
 
             int id = v.getId();
             switch (id) {
+                /*
                 case R.id.imageButton_up:
                     room_no += 1;
                     updatePrice();
@@ -169,8 +198,10 @@ public class Booking_Detail_Activity extends AppCompatActivity {
                         Toast.makeText(Booking_Detail_Activity.this, "Cannot be less than 1", Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.button_confirm:
+                 */
 
+                case R.id.button_confirm:
+/*
                     String customer_name = editText_customer_name.getText().toString().trim();
                     String customer_phone = editText_customer_phone.getText().toString().trim();
                     String customer_email = editText_customer_email.getText().toString().trim();
@@ -191,9 +222,11 @@ public class Booking_Detail_Activity extends AppCompatActivity {
                     }
 
                     if( !customer_name.isEmpty() && !customer_phone.isEmpty() && !customer_email.isEmpty()) {
-                        postEnquiry(room_id, name, checkin, checkout, String.valueOf(difference), String.valueOf(room_no), String.format("%.2f", total_price), customer_name, customer_phone, customer_email);
+                        postEnquiry();
                     }
                     break;
+                    */
+                    postEnquiry();
 
                 case R.id.button_cancel:
                     Intent intent = new Intent(v.getContext(), MainActivity.class);

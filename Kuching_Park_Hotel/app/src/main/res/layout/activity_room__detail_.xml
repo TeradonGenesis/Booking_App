@@ -13,7 +13,7 @@
 
     <ImageView
         android:id="@+id/imageView_roomDetail_image"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/room_sample"
         android:adjustViewBounds="true"

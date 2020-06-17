@@ -10,6 +10,13 @@
     <color name="grey_label">#777777</color>
     <color name="grey_line">#aaaaab</color>
     <color name="white">#ffffff</color>
+    <color name="grey">#f3f3f3</color>
+
+    <!--TODO apply this green color to the relevant items -->
+    <color name="green">#00E9C2</color>
+    <color name="dark_grey">#707070</color>
+    <color name="tab_bg">#FAFAFA</color>
     <color name="yellowgreen">#ADFF2F</color>
+    <color name="bg_grey">#F4F6FA</color>
 
 </resources>
