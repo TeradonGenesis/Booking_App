@@ -2,7 +2,6 @@ package com.example.kuching_park_hotel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,26 +23,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
+    //UI elements
     Button button,button_create_account;
-    EditText login_email;
-    EditText login_password;
-    String email_details;
-    String email_password;
+    EditText login_email,login_password;
+    String email_details,email_password;
 
     //temp store data
     Member test_member;
 
-    //RequestQueue - to be cleaned
+    //RequestQueue and URL's
     RequestQueue rq;
+    //email verification
     private final String URL = "http://10.0.2.2/connections/android/email_verification.php";
+    //generate and verification of api key
     private final String API_URL = "http://10.0.2.2/connections/android/api_gen.php";
 
-    //SharedPref - to be cleaned
+    //SharedPref
     private static final String SHARED_PREF = "member";
     private static final String MEMBER_OBJECT = "member_object";
     private static final String JWT ="jwt";
@@ -52,13 +51,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         //somewhere here check whether got previous login details using Shared Preferences
         //if not then do below login page
 
         //reset shared pref for test sake
-        resetSharedPref();
+//        resetSharedPref();
 
         //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -118,9 +115,8 @@ public class Login extends AppCompatActivity {
     private void resetSharedPref() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(MEMBER_OBJECT,"");
-        editor.putString(JWT,"");
-        editor.apply();
+        editor.putString(MEMBER_OBJECT,"").apply();
+        editor.putString(JWT,"").apply();
     }
 
 
@@ -144,8 +140,7 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                String option="verify";
-                params.put("option",option);
+                params.put("option","verify");
                 params.put("jwt",jwt);
                 params.put("email",test_member.getEmail());
                 params.put("password",test_member.getPassword());
@@ -154,6 +149,8 @@ public class Login extends AppCompatActivity {
         };
         MySingleton.getInstance(this).addToRequestQueue(sr);
     }
+
+
     //interface for execution of function after async task is done
     public interface VolleyCallback{
         void onSuccess(String result);
@@ -168,20 +165,19 @@ public class Login extends AppCompatActivity {
                 String jwt = response;
                 SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(JWT,jwt);
-                editor.apply();
+                editor.putString(JWT,jwt).apply();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(Login.this,"Network error generating login token",
+                        Toast.LENGTH_LONG);
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                String option="gen";
-                params.put("option",option);
+                params.put("option","gen");
                 return params;
             }
         };
@@ -201,14 +197,14 @@ public class Login extends AppCompatActivity {
                     Log.d("console","Inside the try");
                     JSONArray res = new JSONArray(response);
                     if(res.length()==0){
-                        Toast.makeText(Login.this, "Email or password does not match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Email or password does not match",
+                                Toast.LENGTH_SHORT).show();
                     }else{
                         //add data into the member object
-                        //Log.d("TEST", String.valueOf(res));
                         for(int i=0;i<res.length();i++){
                             JSONObject jsonObject = res.getJSONObject(i);
 
-                            Member member = new Member
+                            test_member  = new Member
                                     (jsonObject.getString("member_no"),
                                             jsonObject.getString("name"),
                                             jsonObject.getString("address"),
@@ -219,8 +215,7 @@ public class Login extends AppCompatActivity {
                                             jsonObject.getString("password"),
                                             jsonObject.getInt("mobile"),
                                             jsonObject.getInt("postcode"));
-                            test_member = member;
-                            Log.d("MY PASSWORD IS:",test_member.getPassword());
+//                            Log.d("MY PASSWORD IS:",test_member.getPassword());
                         }
                         //call genkey here before moving to new activity,save in shared pref
                         apiGen();
@@ -229,8 +224,7 @@ public class Login extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         Gson gson = new Gson();
                         String json = gson.toJson(test_member);
-                        editor.putString(MEMBER_OBJECT,json);
-                        editor.apply();
+                        editor.putString(MEMBER_OBJECT,json).apply();
 
                         //Start new activity
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
