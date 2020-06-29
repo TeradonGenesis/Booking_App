@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
         //if not then do below login page
 
         //reset shared pref for test sake
-//        resetSharedPref();
+        resetSharedPref();
 
         //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -95,12 +95,14 @@ public class Login extends AppCompatActivity {
                 public void onSuccess(String result) {
                     //add more error handling
                     if(result.equals("1")){
-                        Log.d("CONSOLE","AUTOLOGIN SUCCESS!");
+                        Log.d("CONSOLE","AUTOLOGIN SUCCESS!");//this works
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         intent.putExtra("Member",test_member);
                         startActivity(intent);
                     }else{
-                        Log.d("console","Invalid key or your account doesn't exist!");
+                        Toast.makeText(Login.this,"Error key or account doesn't exist!",
+                                Toast.LENGTH_LONG).show();
+//                        Log.d("console","ACCOUNT DOESN'T EXIST");//this works
                         //clear SharedPrefs
                         resetSharedPref();
                     }
@@ -171,7 +173,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Login.this,"Network error generating login token",
-                        Toast.LENGTH_LONG);
+                        Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -194,7 +196,6 @@ public class Login extends AppCompatActivity {
             public void onResponse(String response) {
                 try
                 {
-                    Log.d("console","Inside the try");
                     JSONArray res = new JSONArray(response);
                     if(res.length()==0){
                         Toast.makeText(Login.this, "Email or password does not match",
@@ -238,7 +239,8 @@ public class Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Login.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "No internet connection",
+                        Toast.LENGTH_SHORT).show();//this works
             }
         })
         {
