@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
         //if not then do below login page
 
         //reset shared pref for test sake
-        resetSharedPref();
+//        resetSharedPref();
 
         //get shared pref member object and jwt
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -99,6 +99,7 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         intent.putExtra("Member",test_member);
                         startActivity(intent);
+                        finish();
                     }else{
                         Toast.makeText(Login.this,"Error key or account doesn't exist!",
                                 Toast.LENGTH_LONG).show();

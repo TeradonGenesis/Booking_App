@@ -1,24 +1,36 @@
 package com.example.kuching_park_hotel;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class User_profile_Fragment extends Fragment {
 
     private EditText user_name, user_email, user_address, user_mobile;
     private Member test_member;
-
+    private Button logout;
     public User_profile_Fragment(Member member)
     {
         test_member = member;
     }
+
+    //SharedPref
+    //SharedPref
+    private static final String SHARED_PREF = "member";
+    private static final String MEMBER_OBJECT = "member_object";
+    private static final String JWT ="jwt";
 
 
     @Override
@@ -48,5 +60,23 @@ public class User_profile_Fragment extends Fragment {
         user_mobile = v.findViewById(R.id.editText_user_mobile);
         user_mobile.setText(String.valueOf(test_member.getMobile()));
         user_mobile.setEnabled(false);
+
+        //Logout
+        logout = v.findViewById(R.id.button_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetSharedPref();
+                Intent intent = new Intent(getActivity(),Login.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+    }
+    private void resetSharedPref() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MEMBER_OBJECT,"").apply();
+        editor.putString(JWT,"").apply();
     }
 }
