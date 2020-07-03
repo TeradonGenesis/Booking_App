@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void initUI() {
         ViewPager viewPager = findViewById(R.id.viewpager);
-        MyFragmentAdapter fragmentPagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(),member);
+        MyFragmentAdapter fragmentPagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(),this);
         viewPager.setAdapter(fragmentPagerAdapter);
         viewPager.setCurrentItem(0);
 

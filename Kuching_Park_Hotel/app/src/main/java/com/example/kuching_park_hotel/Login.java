@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
         //somewhere here check whether got previous login details using Shared Preferences
         //if not then do below login page
 
-        //reset shared pref for test sake
+        //reset shared pref for test sake -  remove if log out button is made
 //        resetSharedPref();
 
         //get shared pref member object and jwt
