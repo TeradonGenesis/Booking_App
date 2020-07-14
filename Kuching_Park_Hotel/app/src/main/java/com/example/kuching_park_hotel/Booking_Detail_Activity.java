@@ -126,7 +126,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String message = "Sent successfully! We will reply within 3 days. Please check your email";
+                String message = "Your booking is successful!";
                 String btn_message = "Return to rooms";
                 send_status(message, btn_message);
             }
