@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         initDatabase(this.getApplicationContext());
     }
 
+    //getMember() is redundant, member info grabbed through sharedpref in fragment manager
     private void getMember() {
         Intent intent = getIntent();
         member = (Member) intent.getSerializableExtra("Member");
