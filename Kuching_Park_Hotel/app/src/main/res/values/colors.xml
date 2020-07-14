@@ -19,4 +19,10 @@
     <color name="yellowgreen">#ADFF2F</color>
     <color name="bg_grey">#F4F6FA</color>
 
+    <!-- UI/UX Colors -->
+    <color name="lightblue">#77bec4</color>
+    <color name="orange">#ef4751</color>
+    <color name="darkblue">#042b3d</color>
+    <color name="textcolor">#5D8EA4</color>
+
 </resources>
