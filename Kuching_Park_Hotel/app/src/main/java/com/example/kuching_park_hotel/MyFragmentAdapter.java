@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 public class MyFragmentAdapter extends FragmentPagerAdapter {
     private Fragment[] childFragments;
-    private String[] tabTitles = new String[]{"Dashboard", "Bookings", "Messages", "Profile"};
+    private String[] tabTitles = new String[]{"Home", "Bookings", "Messages", "Profile"};
     private Member test_member;
 
     //SharedPref
