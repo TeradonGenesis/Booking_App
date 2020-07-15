@@ -208,7 +208,7 @@ public class Search_Room_Activity extends AppCompatActivity {
 
     //Function to perform a POST function
     public void checkAvailability(final String check_in, final String check_out, final int nights, final int qty, final int guests) {
-        String url = "http://10.0.2.2/API/search_room_api.php";
+        String url = "http://103.6.196.63/~smdigitalcom/API/search_room_api.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private String url = "http://10.0.2.2/r2g/files/room_type/image/";
+    private String url = "http://103.6.196.63/~smdigitalcom/Rooms2go/files/room_type/image/";
     private ArrayList<Room> roomArrayList;
     private String check_in, check_out;
     private int nights, qty;
