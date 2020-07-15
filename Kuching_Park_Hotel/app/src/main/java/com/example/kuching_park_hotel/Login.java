@@ -37,9 +37,9 @@ public class Login extends AppCompatActivity {
 
     //RequestQueue and URL's
     RequestQueue rq;
-    //email verification
+    //email verification TODO
     private final String URL = "http://10.0.2.2/connections/android/email_verification.php";
-    //generate and verification of api key
+    //generate and verification of api key TODO
     private final String API_URL = "http://10.0.2.2/connections/android/api_gen.php";
 
     //SharedPref

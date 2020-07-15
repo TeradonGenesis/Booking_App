@@ -27,7 +27,7 @@ public class Account_Creation_Activity extends AppCompatActivity {
     private Button button_account_creation;
     private RequestQueue rq;
 
-    //Calling script
+    //Calling script and change the account api TODO
     private final String URL = "http://10.0.2.2/connections/android/account_creation.php";
 
     @Override
