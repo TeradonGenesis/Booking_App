@@ -12,13 +12,15 @@ import java.math.BigInteger;
 * Correction 2/5/2020 3:44pm
 * check_in and check_out time changed to bigint data type because int has a limit until 2038
 * */
+
+
 public class Booking_History {
     private int booking_id,room_id,guest_ref,room_qty;
-    private BigInteger check_in,check_out;
+    private String check_in,check_out;
     private String room_name;
     private float total;
 
-    public Booking_History(int booking_id, int room_id, int guest_ref, int room_qty, BigInteger check_in, BigInteger check_out, String room_name, float total) {
+    public Booking_History(int booking_id, int room_id, int guest_ref, int room_qty, String check_in, String check_out, String room_name, float total) {
         this.booking_id = booking_id;
         this.room_id = room_id;
         this.guest_ref = guest_ref;
@@ -45,11 +47,11 @@ public class Booking_History {
         return room_qty;
     }
 
-    public BigInteger getCheck_in() {
+    public String getCheck_in() {
         return check_in;
     }
 
-    public BigInteger getCheck_out() {
+    public String getCheck_out() {
         return check_out;
     }
 

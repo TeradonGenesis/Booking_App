@@ -26,7 +26,7 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
         String json = sharedPreferences.getString(MEMBER_OBJECT,"");
         test_member = gson.fromJson(json,Member.class);
 
-        childFragments = new Fragment[]{new Mainpage_Fragment(), new Enquiry_Fragment(), new Map_Fragment(),new User_profile_Fragment(test_member)};
+        childFragments = new Fragment[]{new Mainpage_Fragment(), new MyBookingsFragment(test_member), new Map_Fragment(),new User_profile_Fragment(test_member)};
     }
 
     @Override
