@@ -13,9 +13,10 @@ public class Member implements Serializable {
     private int mobile,postcode;
 
 
-    public Member(String member_no, String name, String address, String email, String country, String state, String city,String password ,int mobile, int postcode) {
+    public Member(String member_no, String name, String address, String email, String country, String state,
+                  String city,String password ,int mobile, int postcode) {
         this.member_no = member_no;
-        this.name = name;
+        this.name = name;//need modify first name and last name combine
         this.address = address;
         this.email = email;
         this.country = country;
