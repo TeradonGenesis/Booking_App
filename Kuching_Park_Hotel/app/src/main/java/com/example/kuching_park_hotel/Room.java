@@ -35,6 +35,9 @@ public class Room implements Parcelable {
     private String sub_image2;
     private ArrayList<Rates> ratesArrayList = new ArrayList<>();
 
+    //Extras arraylist here
+    private ArrayList<Extra> extrasArrayList =  new ArrayList<>();
+
     public Room(String id, String image_link, String room_name, String no_beds, Double price, String no_guests, int stocks, String check_in, String check_out, int room_qty, int nights) {
         this.id = id;
         this.image_link = image_link;
@@ -110,7 +113,11 @@ public class Room implements Parcelable {
         return ratesArrayList;
     }
 
-/*
+    public ArrayList<Extra> getExtrasArrayList() {
+        return extrasArrayList;
+    }
+
+    /*
     public String getSub_image1() {
         return sub_image1;
     }
@@ -120,8 +127,15 @@ public class Room implements Parcelable {
     }*/
 
     //setters
+
+
+
     public void setRatesArrayList(ArrayList<Rates> ratesArrayList) {
         this.ratesArrayList = ratesArrayList;
+    }
+
+    public void setExtrasArrayList(ArrayList<Extra> extrasArrayList) {
+        this.extrasArrayList = extrasArrayList;
     }
 
     public void setId(String id) {
@@ -175,6 +189,7 @@ public class Room implements Parcelable {
         no_guests = in.readString();
         stocks = in.readInt();
         in.readTypedList(ratesArrayList ,Rates.CREATOR);
+        //add for extras list
     }
 
     @Override
@@ -192,6 +207,7 @@ public class Room implements Parcelable {
         dest.writeString(no_guests);
         dest.writeInt(stocks);
         dest.writeTypedList(ratesArrayList);
+        //add for extras list
     }
 
     @SuppressWarnings("unused")

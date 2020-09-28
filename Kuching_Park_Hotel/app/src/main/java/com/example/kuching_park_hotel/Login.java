@@ -218,6 +218,7 @@ public class Login extends AppCompatActivity {
                                             jsonObject.getString("password"),
                                             jsonObject.getInt("mobile"),
                                             jsonObject.getInt("postcode"));
+                            Log.d("member name is",test_member.getName());
 //                            Log.d("MY PASSWORD IS:",test_member.getPassword());
                         }
                         //call genkey here before moving to new activity,save in shared pref
