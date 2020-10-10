@@ -44,6 +44,8 @@ public class Room_Info_Activity extends AppCompatActivity {
     private Double price;
     private Date startDate, endDate;
     private ArrayList<Rates> ratesArrayList;
+    //add extras
+    private ArrayList<Extra> extrasArrayList;
     private int room_qty, nights;
     private Double total;
     private String price_summary;
@@ -92,7 +94,8 @@ public class Room_Info_Activity extends AppCompatActivity {
         room_qty = room_data.getInt("room_qty");
         nights = room_data.getInt("nights");
         ratesArrayList = room_data.getParcelableArrayList("special_rates");
-
+        //do extras version
+        extrasArrayList = room_data.getParcelableArrayList("extras");
         String currency = "RM " + String.format("%.2f", price);
 
         Picasso.get().load(image).into(imageView_room);
@@ -171,6 +174,8 @@ public class Room_Info_Activity extends AppCompatActivity {
                     detail_bundle.putInt("nights", nights);
                     detail_bundle.putInt("room_qty", room_qty);
                     detail_bundle.putSerializable("rates", rates_map);
+                    //do extras arraylist
+                    detail_bundle.putParcelableArrayList("extras",extrasArrayList);
                     intent.putExtras(detail_bundle);
                     startActivity(intent);
 

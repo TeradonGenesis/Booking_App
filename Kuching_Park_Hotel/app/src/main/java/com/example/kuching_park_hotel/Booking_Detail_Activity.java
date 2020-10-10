@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public class Booking_Detail_Activity extends AppCompatActivity {
     private Double price = 0.00, total_price = 0.00,sum_total = 0.00;
     private RequestQueue requestQueue;
     private HashMap<Double, Integer> rates_map = new HashMap<>();
+    //do hashmap for extras
+    private ArrayList<Extra> extrasArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,8 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         difference = room_data.getInt("nights");
         room_qty = room_data.getInt("room_qty");
         rates_map = (HashMap<Double, Integer>) room_data.getSerializable("rates");
+        //do extras version
+        extrasArrayList = room_data.getParcelableArrayList("extras");
 /*
         updatePrice();
 
