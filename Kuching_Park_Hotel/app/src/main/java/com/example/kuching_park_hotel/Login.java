@@ -37,9 +37,9 @@ public class Login extends AppCompatActivity {
 
     //RequestQueue and URL's
     RequestQueue rq;
-    //email verification TODO
+    //email verification TODO - Modify to refer to smdigital
     private final String URL = "http://10.0.2.2/connections/android/email_verification.php";
-    //generate and verification of api key TODO
+    //generate and verification of api key TODO - same as smdigital
     private final String API_URL = "http://10.0.2.2/connections/android/api_gen.php";
 
     //SharedPref
@@ -62,6 +62,7 @@ public class Login extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString(MEMBER_OBJECT,"");
         String stored_jwt = sharedPreferences.getString(JWT,"");
+        Log.d("JWT TOKEN",stored_jwt);
         //add code to check token validity
 
         //then proceed to grab json object from shared pref
@@ -217,6 +218,7 @@ public class Login extends AppCompatActivity {
                                             jsonObject.getString("password"),
                                             jsonObject.getInt("mobile"),
                                             jsonObject.getInt("postcode"));
+                            Log.d("member name is",test_member.getName());
 //                            Log.d("MY PASSWORD IS:",test_member.getPassword());
                         }
                         //call genkey here before moving to new activity,save in shared pref
