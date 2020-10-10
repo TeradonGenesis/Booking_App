@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkblue"
+    android:padding="10dp"
+    tools:context="com.example.kuching_park_hotel.Booking_History_Detail_Activity">
+
+    <TextView
+        android:id="@+id/textView_history_booking_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Booking ID: B001"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView_history_room_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room: Standard Twin Sharing Room"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/textView_history_booking_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView_history_room_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Qty: 2"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/textView_history_room_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView_history_check_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check In: 25/7/20"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/textView_history_room_qty"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView_history_check_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Out: 28/7/20"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/textView_history_check_in"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView_history_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total RM 1000.00"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/textView_history_check_out"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

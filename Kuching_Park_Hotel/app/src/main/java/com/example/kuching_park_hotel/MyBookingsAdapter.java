@@ -33,11 +33,11 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.Bo
     public void onBindViewHolder(@NonNull BookingsViewHolder holder, int position) {
         Booking_History booking = bookingHistoryArrayList.get(position);
         String name = booking.getRoom_name();
-        float price = booking.getTotal();
+        String price = "RM " + booking.getTotal() + "0";
         String duration = booking.getCheck_in() + " - " + booking.getCheck_out();
 
         holder.roomName.setText(name);
-        holder.price.setText(String.valueOf(price));
+        holder.price.setText(price);
         holder.duration.setText(duration);
     }
 
@@ -71,7 +71,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.Bo
             String room_name = bookingHistoryArrayList.get(pos).getRoom_name();
             float total = bookingHistoryArrayList.get(pos).getTotal();
 
-            Intent intent = new Intent(v.getContext(), MyBookingsFragment.class);
+            Intent intent = new Intent(v.getContext(), Booking_History_Detail_Activity.class);
             Bundle detail_bundle = new Bundle();
             detail_bundle.putInt("booking_id", booking_id);
             detail_bundle.putInt("room_id", room_id);
@@ -80,7 +80,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.Bo
             detail_bundle.putString("check_in", check_in);
             detail_bundle.putString("check_out", check_out);
             detail_bundle.putString("room_name", room_name);
-            detail_bundle.putFloat("stocks", total);
+            detail_bundle.putFloat("total", total);
 
             intent.putExtras(detail_bundle);
             v.getContext().startActivity(intent);

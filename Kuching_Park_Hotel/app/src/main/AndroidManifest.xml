@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Booking_History_Detail_Activity"></activity>
         <activity
             android:name=".Room_Info_Activity"
             android:label="@string/title_activity_room__info_"
