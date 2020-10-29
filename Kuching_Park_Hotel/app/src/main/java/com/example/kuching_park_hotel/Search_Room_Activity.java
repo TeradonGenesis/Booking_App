@@ -235,6 +235,19 @@ public class Search_Room_Activity extends AppCompatActivity {
                                 }
                             }
 
+                            //add extras version of line 227 ->236
+                            // special note: the php script here is not from mobile_api/room_rates_api.php
+                            JSONArray extrasArray = jo.getJSONArray("extras");
+
+                            if(extrasArray.length()>0){
+                                for(i=0;i<extrasArray.length();i++){
+                                    JSONObject extras = extrasArray.getJSONObject(i);
+                                    Extra extrasItem = new Extra(extras.getString("id"),extras.getString("name"),
+                                            extras.getString("desc"),extras.getString("room_types"),extras.getString("charge_value"),
+                                            extras.getString("maximum_qty"));
+                                    roomItem.getExtrasArrayList().add(extrasItem);
+                                }
+                            }
                             rooms.add(roomItem);
                         }
 

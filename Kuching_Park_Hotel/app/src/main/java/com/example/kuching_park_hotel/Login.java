@@ -147,7 +147,7 @@ public class Login extends AppCompatActivity {
                 params.put("option","verify");
                 params.put("jwt",jwt);
                 params.put("email",test_member.getEmail());
-                params.put("password",test_member.getPassword());
+//                params.put("password",test_member.getPassword()); //modify php script to accomodate
                 return params;
             }
         };
@@ -208,17 +208,17 @@ public class Login extends AppCompatActivity {
                             JSONObject jsonObject = res.getJSONObject(i);
 
                             test_member  = new Member
-                                    (jsonObject.getString("member_no"),
-                                            jsonObject.getString("name"),
+                                    (jsonObject.getString("id"),
+                                            jsonObject.getString("membership_no"),
+                                            jsonObject.getString("username"),
+                                            jsonObject.getString("guest_name"),
                                             jsonObject.getString("address"),
                                             jsonObject.getString("email"),
-                                            jsonObject.getString("country"),
                                             jsonObject.getString("state"),
                                             jsonObject.getString("city"),
-                                            jsonObject.getString("password"),
                                             jsonObject.getInt("mobile"),
                                             jsonObject.getInt("postcode"));
-                            Log.d("member name is",test_member.getName());
+                            Log.d("member name is",test_member.getGuest_name());
 //                            Log.d("MY PASSWORD IS:",test_member.getPassword());
                         }
                         //call genkey here before moving to new activity,save in shared pref

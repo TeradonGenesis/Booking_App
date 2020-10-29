@@ -117,7 +117,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             String description = roomArrayList.get(pos).getDescription();
             int stocks = roomArrayList.get(pos).getStocks();
             ArrayList<Rates> ratesArrayList =  roomArrayList.get(pos).getRatesArrayList();
-
+            //add extras version
+            ArrayList<Extra> extrasArrayList = roomArrayList.get(pos).getExtrasArrayList();
             String image_url = url + "/" +  roomArrayList.get(pos).getId() + "/" + image;
 
             Intent intent = new Intent(v.getContext(), Room_Info_Activity.class);
@@ -135,7 +136,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             detail_bundle.putInt("room_qty", qty);
             detail_bundle.putInt("nights", nights);
             detail_bundle.putParcelableArrayList("special_rates", ratesArrayList);
-
+            //do extras version
+            detail_bundle.putParcelableArrayList("extras",extrasArrayList);
             intent.putExtras(detail_bundle);
             v.getContext().startActivity(intent);
         }
