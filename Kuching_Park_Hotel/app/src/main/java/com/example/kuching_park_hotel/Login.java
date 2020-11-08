@@ -38,9 +38,9 @@ public class Login extends AppCompatActivity {
     //RequestQueue and URL's
     RequestQueue rq;
     //email verification TODO - Modify to refer to smdigital
-    private final String URL = "http://10.0.2.2/connections/android/email_verification.php";
+    private final String URL = "http://103.6.196.63/~smdigitalcom/API/email_verification.php";
     //generate and verification of api key TODO - same as smdigital
-    private final String API_URL = "http://10.0.2.2/connections/android/api_gen.php";
+    private final String API_URL = "http://103.6.196.63/~smdigitalcom/API/login_api.php";
 
     //SharedPref
     private static final String SHARED_PREF = "member";

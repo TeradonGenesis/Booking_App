@@ -20,12 +20,9 @@ public class Room implements Parcelable {
     private String id;
     private String image_link;
     private String room_name;
-    private String no_beds;
     private String description;
-    private Double price;
+    private Double total_price;
     private String no_guests;
-    private String eb_discount;
-    private String eb_duration;
     private int stocks;
     private String check_in;
     private String check_out;
@@ -38,12 +35,12 @@ public class Room implements Parcelable {
     //Extras arraylist here
     private ArrayList<Extra> extrasArrayList =  new ArrayList<>();
 
-    public Room(String id, String image_link, String room_name, String no_beds, Double price, String no_guests, int stocks, String check_in, String check_out, int room_qty, int nights) {
+    public Room(String id, String image_link, String room_name, String description, Double total_price, String no_guests, int stocks, String check_in, String check_out, int nights) {
         this.id = id;
         this.image_link = image_link;
         this.room_name = room_name;
-        this.no_beds = no_beds;
-        this.price = price;
+        this.description = description;
+        this.total_price = total_price;
         this.no_guests = no_guests;
         this.stocks = stocks;
         this.check_in = check_in;
@@ -66,11 +63,7 @@ public class Room implements Parcelable {
     }
 
     public Double getPrice() {
-        return price;
-    }
-
-    public String getNo_beds() {
-        return no_beds;
+        return total_price;
     }
 
     public String getNo_guests() {
@@ -79,14 +72,6 @@ public class Room implements Parcelable {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getEb_discount() {
-        return eb_discount;
-    }
-
-    public String getEb_duration() {
-        return eb_duration;
     }
 
     public int getStocks() {
@@ -150,28 +135,12 @@ public class Room implements Parcelable {
         this.room_name = room_name;
     }
 
-    public void setNo_beds(String no_beds) {
-        this.no_beds = no_beds;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public void setNo_guests(String no_guests) {
         this.no_guests = no_guests;
-    }
-
-    public void setEb_discount(String eb_discount) {
-        this.eb_discount = eb_discount;
-    }
-
-    public void setEb_duration(String eb_duration) {
-        this.eb_duration = eb_duration;
     }
 
     public void setStocks(int stocks) {
@@ -184,11 +153,12 @@ public class Room implements Parcelable {
         id = in.readString();
         image_link = in.readString();
         room_name = in.readString();
-        no_beds = in.readString();
-        price = in.readDouble();
+        description = in.readString();
+        total_price = in.readDouble();
         no_guests = in.readString();
         stocks = in.readInt();
         in.readTypedList(ratesArrayList ,Rates.CREATOR);
+        in.readTypedList(extrasArrayList ,Extra.CREATOR);
         //add for extras list
     }
 
@@ -202,12 +172,11 @@ public class Room implements Parcelable {
         dest.writeString(id);
         dest.writeString(image_link);
         dest.writeString(room_name);
-        dest.writeString(no_beds);
-        dest.writeDouble(price);
         dest.writeString(no_guests);
         dest.writeInt(stocks);
         dest.writeTypedList(ratesArrayList);
         //add for extras list
+        dest.writeTypedList(extrasArrayList);
     }
 
     @SuppressWarnings("unused")

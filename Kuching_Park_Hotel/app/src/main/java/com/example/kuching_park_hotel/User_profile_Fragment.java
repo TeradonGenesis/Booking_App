@@ -57,7 +57,7 @@ public class User_profile_Fragment extends Fragment {
     private void initUI(View v) {
         //User name
         user_name = v.findViewById(R.id.editText_user_name);
-        user_name.setText(test_member.getName());
+        user_name.setText(test_member.getGuest_name());
         user_name.setEnabled(false);
 
         //User Email

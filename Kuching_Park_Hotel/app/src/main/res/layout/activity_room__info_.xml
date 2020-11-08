@@ -32,7 +32,7 @@
             android:id="@+id/textView_price_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RM 500 for 3 nights \nRM 500 for 3 nights"
+            android:text="RM 500 for 3 nights"
             android:textSize="18sp"
             android:layout_margin="12dp"
             android:layout_gravity="center_vertical|start"

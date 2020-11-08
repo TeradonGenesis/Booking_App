@@ -60,8 +60,6 @@ public class Room_Info_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initUI();
         getBundle();
-        setRates_map();
-        calculate_total();
         clickEvents();
     }
 
@@ -74,7 +72,6 @@ public class Room_Info_Activity extends AppCompatActivity {
         editText_checkin = findViewById(R.id.textView_checkin_input);
         editText_checkout = findViewById(R.id.textView_checkout_input);
         textView_description = findViewById(R.id.textView_description);
-        textView_beds = findViewById(R.id.textView_name_beds);
         btn_send = findViewById(R.id.button_book_now);
     }
 
@@ -96,63 +93,18 @@ public class Room_Info_Activity extends AppCompatActivity {
         ratesArrayList = room_data.getParcelableArrayList("special_rates");
         //do extras version
         extrasArrayList = room_data.getParcelableArrayList("extras");
-        String currency = "RM " + String.format("%.2f", price);
+        String total_price = "RM " + String.format("%.2f", price);
 
         Picasso.get().load(image).into(imageView_room);
         textView_guests.setText(guests);
         textView_name.setText(name);
-        //textView_description.setText(description);
-        textView_beds.setText(beds);
-    }
-
-
-
-    public void setRates_map() {
-        int diff = 0;
-        if(ratesArrayList.isEmpty()) {
-            rates_map.put(price, nights);
-
-        } else {
-            if(nights > calculate_period()) {
-                diff = nights - calculate_period();
-                rates_map.put(price, diff);
-            }
-            setSpecial_rates();
-        }
-    }
-
-    public void setSpecial_rates() {
-        for (Rates rate : ratesArrayList){
-            rates_map.put(rate.getRate(), rate.getDays());
-        }
+        textView_description.setText(description);
+        textView_price.setText(total_price);
     }
 
     //Connect click events to the buttons
     public void clickEvents() {
         btn_send.setOnClickListener(new Click());
-    }
-
-    public int calculate_period() {
-        int period = 0;
-        for (Rates rate : ratesArrayList){
-            period += rate.getDays();
-        }
-
-        return period;
-    }
-    
-    public void calculate_total() {
-        StringBuilder str = new StringBuilder();
-        for(Map.Entry<Double, Integer> rate : rates_map.entrySet()) {
-            if(rates_map.size() > 1) {
-                str.append("RM ").append(rate.getKey()).append("0").append(" for ").append(rate.getValue()).append(" nights").append("\n");
-            } else {
-                str.append("RM ").append(rate.getKey()).append("0").append(" for ").append(rate.getValue()).append(" nights");
-            }
-
-        }
-        textView_price.setText(str.toString());
-
     }
 
     //Set up click events

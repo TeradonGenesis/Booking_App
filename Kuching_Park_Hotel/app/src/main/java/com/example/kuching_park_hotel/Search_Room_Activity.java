@@ -94,8 +94,8 @@ public class Search_Room_Activity extends AppCompatActivity {
         textView_room_qty = findViewById(R.id.textView_room_qty);
         textView_guest_qty = findViewById(R.id.textView_guest_qty);
 
-        imageButton_room_add = findViewById(R.id.imageView_room_plus);
-        imageButton_room_minus = findViewById(R.id.imageView_room_minus);
+        //imageButton_room_add = findViewById(R.id.imageView_room_plus);
+        //imageButton_room_minus = findViewById(R.id.imageView_room_minus);
         imageButton_guest_add = findViewById(R.id.imageView_guest_plus);
         imageButton_guest_minus = findViewById(R.id.imageView_guest_minus);
 
@@ -104,8 +104,8 @@ public class Search_Room_Activity extends AppCompatActivity {
     
 
     public void clickEvents() {
-        imageButton_room_add.setOnClickListener(new Click());
-        imageButton_room_minus.setOnClickListener(new Click());
+        //setOnClickListener(new Click());
+        //imageButton_room_minus.setOnClickListener(new Click());
         imageButton_guest_add.setOnClickListener(new Click());
         imageButton_guest_minus.setOnClickListener(new Click());
         btn_check.setOnClickListener(new Click());
@@ -141,8 +141,6 @@ public class Search_Room_Activity extends AppCompatActivity {
         check_in = date_post_Format.format(today);
         check_out = date_post_Format.format(nextDay);
 
-
-        textView_room_qty.setText(String.valueOf(room_qty));
         textView_guest_qty.setText(String.valueOf(guest_qty));
     }
 
@@ -207,8 +205,8 @@ public class Search_Room_Activity extends AppCompatActivity {
     }
 
     //Function to perform a POST function
-    public void checkAvailability(final String check_in, final String check_out, final int nights, final int qty, final int guests) {
-        String url = "http://103.6.196.63/~smdigitalcom/API/search_room_api.php";
+    public void checkAvailability(final String check_in, final String check_out, final int guests) {
+        String url = "http://103.6.196.63/~smdigitalcom/API/rate_listing_mobile.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -222,15 +220,15 @@ public class Search_Room_Activity extends AppCompatActivity {
 
                             JSONObject jo = array.getJSONObject(i);
 
-                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("category"), jo.getDouble("base_Price"), jo.getString("noGuests"), jo.getInt("stocks"), jo.getString("check_in"), jo.getString("check_out"), jo.getInt("room_qty"), jo.getInt("nights"));
+                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("room_description"), jo.getDouble("total"), jo.getString("maxGuests"), jo.getInt("stocks"), jo.getString("check_in"), jo.getString("check_out"), jo.getInt("nights"));
                             //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
-                            JSONArray ratesArray = jo.getJSONArray("special_rates");
+                            JSONArray ratesArray = jo.getJSONArray("rates");
 
                             if(ratesArray.length() > 0) {
                                 for (int j = 0; j < ratesArray.length(); j++) {
 
                                     JSONObject rates = ratesArray.getJSONObject(j);
-                                    Rates ratesItem = new Rates(rates.getString("id"), rates.getInt("days"), rates.getDouble("rate"), rates.getString("start"), rates.getString("end"));
+                                    Rates ratesItem = new Rates(rates.getString("date"), rates.getDouble("rate"), rates.getInt("rate_stock"));
                                     roomItem.getRatesArrayList().add(ratesItem);
                                 }
                             }
@@ -243,7 +241,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                                 for(i=0;i<extrasArray.length();i++){
                                     JSONObject extras = extrasArray.getJSONObject(i);
                                     Extra extrasItem = new Extra(extras.getString("id"),extras.getString("name"),
-                                            extras.getString("desc"),extras.getString("room_types"),extras.getString("charge_value"),
+                                            extras.getString("desc"),extras.getString("charge_value"),
                                             extras.getString("maximum_qty"));
                                     roomItem.getExtrasArrayList().add(extrasItem);
                                 }
@@ -252,7 +250,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                         }
 
                         for (Room room : rooms){
-                            Log.i("Room: ", String.valueOf(room.get_Nights()) + room.getRoom_name() + room.getCheck_in() + room.getCheck_out() + room.getRoom_qty());
+                            Log.i("Room: ", String.valueOf(room.get_Nights()) + room.getRoom_name() + room.getCheck_in() + room.getCheck_out());
                         }
 
                         send_availability();
@@ -278,8 +276,8 @@ public class Search_Room_Activity extends AppCompatActivity {
                 Map<String, String> MyData = new HashMap<String, String>();
                 MyData.put("check_in", check_in);
                 MyData.put("check_out", check_out);
-                MyData.put("nights", String.valueOf(nights));
-                MyData.put("qty", String.valueOf(qty));
+                //MyData.put("nights", String.valueOf(nights));
+                //MyData.put("qty", String.valueOf(qty));
                 MyData.put("guests", String.valueOf(guests));
                 return MyData;
             }
@@ -309,6 +307,7 @@ public class Search_Room_Activity extends AppCompatActivity {
 
             int id = v.getId();
             switch (id) {
+                /*
                 case R.id.imageView_room_plus:
                     room_qty += 1;
                     textView_room_qty.setText(String.valueOf(room_qty));
@@ -321,6 +320,8 @@ public class Search_Room_Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Cannot be less than 1", Toast.LENGTH_SHORT).show();
                     }
                     break;
+
+                 */
                 case R.id.imageView_guest_plus:
                     guest_qty += 1;
                     textView_guest_qty.setText(String.valueOf(guest_qty));
@@ -334,7 +335,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                     }
                     break;
                 case R.id.button_check:
-                    checkAvailability(check_in, check_out, nights, room_qty, guest_qty);
+                    checkAvailability(check_in, check_out, guest_qty);
                 default:
                     break;
 

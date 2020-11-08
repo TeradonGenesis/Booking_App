@@ -6,25 +6,20 @@ import android.os.Parcelable;
 
 public class Rates implements Parcelable {
 
-    private String id;
-    private int days;
+    private String date;
     private Double rate;
-    private String start, end;
+    private int stock;
 
-    public Rates(String id, int days, Double rate, String start, String end) {
-        this.id = id;
-        this.days = days;
+    public Rates(String date, Double rate, int stock) {
+        this.date = date;
         this.rate = rate;
-        this.start = start;
-        this.end = end;
+        this.stock = stock;
     }
 
     protected Rates(Parcel in) {
-        id = in.readString();
-        days = in.readInt();
+        date = in.readString();
         rate = in.readDouble();
-        start = in.readString();
-        end = in.readString();
+        stock = in.readInt();
     }
 
     public static final Creator<Rates> CREATOR = new Creator<Rates>() {
@@ -39,45 +34,16 @@ public class Rates implements Parcelable {
         }
     };
 
-    public String getId() {
-        return id;
+    public String getDate() {
+        return date;
     }
-
-    public int getDays() {
-        return days;
-    }
-
     public Double getRate() {
         return rate;
     }
-
-    public String getStart() {
-        return start;
+    public int getStock() {
+        return stock;
     }
 
-    public String getEnd() {
-        return end;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setDays(int days) {
-        this.days = days;
-    }
-
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
-
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
 
     @Override
     public int describeContents() {
@@ -86,55 +52,9 @@ public class Rates implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeInt(days);
+        dest.writeString(date);
         dest.writeDouble(rate);
-        dest.writeString(start);
-        dest.writeString(end);
+        dest.writeInt(stock);
     }
-
-    /*
-    public static class Builder{
-
-        private String id;
-        private int days;
-        private Double rate;
-        private String start, end;
-
-
-        public static Builder newInstance() {
-            return new Builder();
-        }
-
-        public Builder set_Id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder set_Rate(Double rate) {
-            this.rate = rate;
-            return this;
-        }
-
-        public Builder set_Days(int days) {
-            this.days = days;
-            return this;
-        }
-
-        public Builder set_Start(String start) {
-            this.start = start;
-            return this;
-        }
-
-        public Builder set_End(String end) {
-            this.end = end;
-            return this;
-        }
-
-        public Rates build() {
-            return new Rates(this);
-        }
-
-    }*/
 
 }

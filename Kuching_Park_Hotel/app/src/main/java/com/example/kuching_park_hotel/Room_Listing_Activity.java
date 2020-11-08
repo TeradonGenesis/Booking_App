@@ -91,8 +91,8 @@ public class Room_Listing_Activity extends AppCompatActivity {
         Date date1 = format1.parse(checkin);
         Date date2 = format1.parse(checkout);
 
-        String duration = format2.format(date1) + " - " + format2.format(date2) + ", "  + String.valueOf(nights) + " nights";
-        String room_qty = String.valueOf(qty) + " rooms, " + String.valueOf(guests) + " guests";
+        String duration = format2.format(date1) + " - " + format2.format(date2) + ", "  + nights + " nights";
+        String room_qty = guests + " guests";
         textView_duration.setText(duration);
         textView_room_qty.setText(room_qty);
     }
@@ -101,15 +101,16 @@ public class Room_Listing_Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        checkin = bundle.getString("check_in");
-        checkout = bundle.getString("check_out");
-        nights = bundle.getInt("nights");
-        qty = bundle.getInt("qty");
-        guests = bundle.getInt("guests");
-        rooms = bundle.getParcelableArrayList("rooms");
-        myAdapter = new MyAdapter(rooms, checkin, checkout, nights, qty);
-        myAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(myAdapter);
+        if(bundle != null) {
+            checkin = bundle.getString("check_in");
+            checkout = bundle.getString("check_out");
+            nights = bundle.getInt("nights");
+            guests = bundle.getInt("guests");
+            rooms = bundle.getParcelableArrayList("rooms");
+            myAdapter = new MyAdapter(rooms, checkin, checkout, nights);
+            myAdapter.notifyDataSetChanged();
+            recyclerView.setAdapter(myAdapter);
+        }
 
     }
 
