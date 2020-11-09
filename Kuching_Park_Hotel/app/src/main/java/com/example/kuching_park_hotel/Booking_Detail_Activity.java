@@ -29,7 +29,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
     private EditText editText_customer_name, editText_customer_phone, editText_customer_email, editText_norooms;
     private Button btn_confirm, btn_cancel;
     private ImageButton imgBtn_up, imgBtn_down;
-    private int room_no = 1, difference, room_qty;
+    private int room_no = 1, difference, room_qty = 1;
     private String  room_id, name, checkin, checkout, unit_string, price_string;
     private Double price = 0.00, total_price = 0.00,sum_total = 0.00;
     private RequestQueue requestQueue;
@@ -79,7 +79,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         checkout = room_data.getString("check_out");
         difference = room_data.getInt("nights");
         room_qty = room_data.getInt("room_qty");
-        rates_map = (HashMap<Double, Integer>) room_data.getSerializable("rates");
+        total_price = room_data.getDouble("rates");
         //do extras version
         extrasArrayList = room_data.getParcelableArrayList("extras");
 /*
@@ -94,19 +94,11 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         StringBuilder unit = new StringBuilder();
         StringBuilder subtotal = new StringBuilder();
 
-
-
-
-        for(Map.Entry<Double, Integer> rate : rates_map.entrySet()) {
-            unit.append("RM ").append(rate.getKey()).append("0").append(" x ").append(rate.getValue()).append("\n\n");
-            subtotal.append("RM ").append(rate.getKey() * rate.getValue()).append("0").append("\n\n");
-            total_price += Double.valueOf(rate.getKey() * rate.getValue());
-        }
         sum_total = total_price * room_qty;
         String timeline = checkin + " - " + checkout;
         String nights = String.valueOf(difference).concat( " nights");
-        String total_summary = "RM " + String.valueOf(sum_total) + "0";
-        String rooms_total = "RM " + String.valueOf(total_price) + "0" + " x " + String.valueOf(room_qty);
+        String total_summary = "RM " + sum_total + "0";
+        String rooms_total = "RM " + total_price + "0" + " x " + String.valueOf(room_qty);
 
         textView_roomName.setText(name);
         textView_duration.setText(timeline);

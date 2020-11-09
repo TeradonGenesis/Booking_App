@@ -90,8 +90,7 @@ public class Search_Room_Activity extends AppCompatActivity {
         textView_checkout_month = findViewById(R.id.textView_checkout_month);
 
         textView_nights = findViewById(R.id.textView_nights_label);
-
-        textView_room_qty = findViewById(R.id.textView_room_qty);
+        
         textView_guest_qty = findViewById(R.id.textView_guest_qty);
 
         //imageButton_room_add = findViewById(R.id.imageView_room_plus);
@@ -214,13 +213,13 @@ public class Search_Room_Activity extends AppCompatActivity {
                 try {
 
                     JSONArray array = new JSONArray(response);
-
+                    Log.i("Array length: ", String.valueOf(array.length()));
                     if(array.length() > 0) {
                         for (int i = 0; i < array.length(); i++) {
 
                             JSONObject jo = array.getJSONObject(i);
 
-                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("room_description"), jo.getDouble("total"), jo.getString("maxGuests"), jo.getInt("stocks"), jo.getString("check_in"), jo.getString("check_out"), jo.getInt("nights"));
+                            Room roomItem = new Room(jo.getString("id"), jo.getString("image"), jo.getString("name"), jo.getString("room_description"), jo.getDouble("total"), jo.getString("maxGuests"), jo.getInt("stocks"));
                             //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
                             JSONArray ratesArray = jo.getJSONArray("rates");
 
@@ -238,10 +237,9 @@ public class Search_Room_Activity extends AppCompatActivity {
                             JSONArray extrasArray = jo.getJSONArray("extras");
 
                             if(extrasArray.length()>0){
-                                for(i=0;i<extrasArray.length();i++){
-                                    JSONObject extras = extrasArray.getJSONObject(i);
-                                    Extra extrasItem = new Extra(extras.getString("id"),extras.getString("name"),
-                                            extras.getString("desc"),extras.getString("charge_value"),
+                                for(int k = 0; k < extrasArray.length(); k++){
+                                    JSONObject extras = extrasArray.getJSONObject(k);
+                                    Extra extrasItem = new Extra(extras.getString("id"),extras.getString("name"),extras.getString("charge_value"),
                                             extras.getString("maximum_qty"));
                                     roomItem.getExtrasArrayList().add(extrasItem);
                                 }
@@ -250,7 +248,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                         }
 
                         for (Room room : rooms){
-                            Log.i("Room: ", String.valueOf(room.get_Nights()) + room.getRoom_name() + room.getCheck_in() + room.getCheck_out());
+                            Log.i("Room: ", room.getId() + room.getRoom_name());
                         }
 
                         send_availability();
@@ -288,12 +286,10 @@ public class Search_Room_Activity extends AppCompatActivity {
     public void send_availability() {
         Intent intent = new Intent(Search_Room_Activity.this, Room_Listing_Activity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("check_in", check_in);
-        bundle.putString("check_out", check_out);
-        bundle.putInt("nights", nights);
-        bundle.putInt("qty", room_qty);
-        bundle.putInt("guests", guest_qty);
-        bundle.putParcelableArrayList("rooms", rooms);
+        bundle.putString("check_in_sra", check_in);
+        bundle.putString("check_out_sra", check_out);
+        bundle.putInt("nights_sra", nights);
+        bundle.putParcelableArrayList("rooms_sra", rooms);
         intent.putExtras(bundle);
         startActivity(intent);
     }

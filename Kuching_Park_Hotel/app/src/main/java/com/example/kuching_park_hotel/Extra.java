@@ -7,10 +7,9 @@ import android.os.Parcelable;
 public class Extra implements Parcelable {
     private String id,name,description,room_types,charge_value,maximum_qty;
 
-    public Extra(String id, String name, String description, String charge_value, String maximum_qty) {
+    public Extra(String id, String name, String charge_value, String maximum_qty) {
         this.id = id;
         this.name = name;
-        this.description = description;
         this.charge_value = charge_value;
         this.maximum_qty = maximum_qty;
     }
@@ -18,8 +17,6 @@ public class Extra implements Parcelable {
     protected Extra(Parcel in) {
         id = in.readString();
         name = in.readString();
-        description = in.readString();
-        room_types = in.readString();
         charge_value = in.readString();
         maximum_qty = in.readString();
     }
@@ -66,7 +63,6 @@ public class Extra implements Parcelable {
 
         dest.writeString(id);
         dest.writeString(name);
-        dest.writeString(description);
         dest.writeString(charge_value);
         dest.writeString(maximum_qty);
     }

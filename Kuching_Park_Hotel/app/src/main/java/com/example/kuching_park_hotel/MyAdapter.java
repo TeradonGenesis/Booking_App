@@ -54,6 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.price.setText("RM".concat(String.format("%.2f", ratesArrayList.get(0).getRate())));
         holder.roomName.setText(room.getRoom_name());
         holder.noGuests.setText(String.valueOf(room.getNo_guests()).concat(" guests"));
+        holder.stocks.setText(String.valueOf(room.getStocks()).concat(" room(s)"));
     }
 
     @Override
@@ -64,7 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView roomImage;
-        private TextView roomName, noGuests, price;
+        private TextView roomName, noGuests, price, stocks;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             roomName = itemView.findViewById(R.id.textView_roomName);
             noGuests = itemView.findViewById(R.id.textView_noGuests);
             price = itemView.findViewById(R.id.textView_roomPrice);
+            stocks = itemView.findViewById(R.id.textView_stocks);
             itemView.setOnClickListener(this);
         }
 

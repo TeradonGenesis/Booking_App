@@ -69,8 +69,6 @@ public class Room_Info_Activity extends AppCompatActivity {
         textView_guests = findViewById(R.id.textView_guests_detail);
         textView_price = findViewById(R.id.textView_price_detail);
         textView_name = findViewById(R.id.textView_name_detail);
-        editText_checkin = findViewById(R.id.textView_checkin_input);
-        editText_checkout = findViewById(R.id.textView_checkout_input);
         textView_description = findViewById(R.id.textView_description);
         btn_send = findViewById(R.id.button_book_now);
     }
@@ -95,8 +93,10 @@ public class Room_Info_Activity extends AppCompatActivity {
         extrasArrayList = room_data.getParcelableArrayList("extras");
         String total_price = "RM " + String.format("%.2f", price);
 
+        String stock_guest = stocks + " room(s)\n" + guests + " guests";
+
         Picasso.get().load(image).into(imageView_room);
-        textView_guests.setText(guests);
+        textView_guests.setText(stock_guest);
         textView_name.setText(name);
         textView_description.setText(description);
         textView_price.setText(total_price);
@@ -125,7 +125,7 @@ public class Room_Info_Activity extends AppCompatActivity {
                     detail_bundle.putString("check_out", check_out);
                     detail_bundle.putInt("nights", nights);
                     detail_bundle.putInt("room_qty", room_qty);
-                    detail_bundle.putSerializable("rates", rates_map);
+                    detail_bundle.putDouble("rates", price);
                     //do extras arraylist
                     detail_bundle.putParcelableArrayList("extras",extrasArrayList);
                     intent.putExtras(detail_bundle);

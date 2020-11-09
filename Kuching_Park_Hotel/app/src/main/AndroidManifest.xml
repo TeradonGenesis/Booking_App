@@ -58,9 +58,6 @@
             android:name=".Booking_Detail_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Room_Detail_Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

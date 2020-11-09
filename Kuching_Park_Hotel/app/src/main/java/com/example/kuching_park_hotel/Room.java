@@ -24,18 +24,13 @@ public class Room implements Parcelable {
     private Double total_price;
     private String no_guests;
     private int stocks;
-    private String check_in;
-    private String check_out;
-    private int room_qty;
-    private int nights;
-    private String sub_image1;
-    private String sub_image2;
+
     private ArrayList<Rates> ratesArrayList = new ArrayList<>();
 
     //Extras arraylist here
     private ArrayList<Extra> extrasArrayList =  new ArrayList<>();
 
-    public Room(String id, String image_link, String room_name, String description, Double total_price, String no_guests, int stocks, String check_in, String check_out, int nights) {
+    public Room(String id, String image_link, String room_name, String description, Double total_price, String no_guests, int stocks) {
         this.id = id;
         this.image_link = image_link;
         this.room_name = room_name;
@@ -43,10 +38,6 @@ public class Room implements Parcelable {
         this.total_price = total_price;
         this.no_guests = no_guests;
         this.stocks = stocks;
-        this.check_in = check_in;
-        this.check_out = check_out;
-        this.room_qty = room_qty;
-        this.nights = nights;
     }
 
     //getters
@@ -76,22 +67,6 @@ public class Room implements Parcelable {
 
     public int getStocks() {
         return stocks;
-    }
-
-    public String getCheck_in() {
-        return check_in;
-    }
-
-    public String getCheck_out() {
-        return check_out;
-    }
-
-    public int getRoom_qty() {
-        return room_qty;
-    }
-
-    public int get_Nights() {
-        return nights;
     }
 
     public ArrayList<Rates> getRatesArrayList() {
@@ -157,6 +132,7 @@ public class Room implements Parcelable {
         total_price = in.readDouble();
         no_guests = in.readString();
         stocks = in.readInt();
+
         in.readTypedList(ratesArrayList ,Rates.CREATOR);
         in.readTypedList(extrasArrayList ,Extra.CREATOR);
         //add for extras list
@@ -169,11 +145,15 @@ public class Room implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeString(id);
         dest.writeString(image_link);
         dest.writeString(room_name);
+        dest.writeString(description);
+        dest.writeDouble(total_price);
         dest.writeString(no_guests);
         dest.writeInt(stocks);
+
         dest.writeTypedList(ratesArrayList);
         //add for extras list
         dest.writeTypedList(extrasArrayList);

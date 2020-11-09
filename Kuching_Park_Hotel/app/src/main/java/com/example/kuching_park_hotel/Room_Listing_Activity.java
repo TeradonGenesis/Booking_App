@@ -80,7 +80,6 @@ public class Room_Listing_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         cardView_filter = findViewById(R.id.card_filter);
         textView_duration = findViewById(R.id.textView_duration);
-        textView_room_qty = findViewById(R.id.textView_room_qty);
     }
 
     public void setText() throws ParseException {
@@ -92,21 +91,18 @@ public class Room_Listing_Activity extends AppCompatActivity {
         Date date2 = format1.parse(checkout);
 
         String duration = format2.format(date1) + " - " + format2.format(date2) + ", "  + nights + " nights";
-        String room_qty = guests + " guests";
         textView_duration.setText(duration);
-        textView_room_qty.setText(room_qty);
     }
 
     public void getBundle() {
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
+        Bundle bundle = this.getIntent().getExtras();
+
         if(bundle != null) {
-            checkin = bundle.getString("check_in");
-            checkout = bundle.getString("check_out");
-            nights = bundle.getInt("nights");
-            guests = bundle.getInt("guests");
-            rooms = bundle.getParcelableArrayList("rooms");
+            checkin = bundle.getString("check_in_sra");
+            checkout = bundle.getString("check_out_sra");
+            nights = bundle.getInt("nights_sra");
+            rooms = bundle.getParcelableArrayList("rooms_sra");
             myAdapter = new MyAdapter(rooms, checkin, checkout, nights);
             myAdapter.notifyDataSetChanged();
             recyclerView.setAdapter(myAdapter);
@@ -123,94 +119,5 @@ public class Room_Listing_Activity extends AppCompatActivity {
             }
         });
     }
-
-
-    //Function to obtain perform GET function from the API and load them into the object class to be displayed in the recycler view list
-    /*
-    private void loadUrlData() {
-
-        if(rooms != null) {
-            rooms.clear();
-        } else {
-            rooms = new ArrayList<Room>();
-        }
-
-        /*final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();*/
-
-    /*
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_DATA, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                /*progressDialog.dismiss();*/
-
-/*
-                try {
-
-                    JSONArray array = new JSONArray(response);
-
-                    if(array.length() > 0) {
-                        for (int i = 0; i < array.length(); i++) {
-
-                            JSONObject jo = array.getJSONObject(i);
-
-                            Room roomItem = new Room();
-                            roomItem.setId(jo.getString("id"));
-                            roomItem.setImage_link(jo.getString("image"));
-                            roomItem.setRoom_name(jo.getString("name"));
-                            roomItem.setPrice(jo.getDouble("base_Price"));
-                            roomItem.setNo_beds(jo.getString("category"));
-                            roomItem.setNo_guests(jo.getString("noGuests"));
-                            //problem with int does not recognise null so put it into string  for eb then cast it into integer if it does not equal null
-                            roomItem.setEb_discount(jo.getString("early_bird_discount"));
-                            roomItem.setEb_duration(jo.getString("early_bird_duration"));
-                            roomItem.setStocks(jo.getInt("stocks"));
-
-
-                            JSONArray ratesArray = jo.getJSONArray("special_rates");
-
-                            if(ratesArray.length() > 0) {
-                                for (int j = 0; j < ratesArray.length(); j++) {
-
-                                    JSONObject rates = ratesArray.getJSONObject(j);
-                                    Rates ratesItem = Rates.Builder.newInstance()
-                                            .set_Id(rates.getString("id"))
-                                            .set_Days(rates.getInt("days"))
-                                            .set_Rate(rates.getDouble("rate"))
-                                            .set_Start(rates.getString("start"))
-                                            .set_End(rates.getString("end"))
-                                            .build();
-                                    roomItem.getSpecial_rates().add(ratesItem);
-                                }
-                            }
-                            rooms.add(roomItem);
-                        }
-                        myAdapter = new MyAdapter(rooms);
-                        recyclerView.setAdapter(myAdapter);
-
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No rooms found", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), "Error! Internet Connection required", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        requestQueue.add(stringRequest);
-    }*/
 
 }
