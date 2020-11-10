@@ -46,7 +46,7 @@ public class Room_Info_Activity extends AppCompatActivity {
     private ArrayList<Rates> ratesArrayList;
     //add extras
     private ArrayList<Extra> extrasArrayList;
-    private int room_qty, nights;
+    private int room_qty, nights, stocks;
     private Double total;
     private String price_summary;
     private HashMap<Double, Integer> rates_map = new HashMap<>();
@@ -83,7 +83,7 @@ public class Room_Info_Activity extends AppCompatActivity {
         String beds = room_data.getString("beds");
         String guests = room_data.getString("guests");
         String description = room_data.getString("description");
-        int stocks = room_data.getInt("stocks");
+        stocks = room_data.getInt("stocks");
         check_in = room_data.getString("check_in");
         check_out = room_data.getString("check_out");
         room_qty = room_data.getInt("room_qty");
@@ -126,6 +126,7 @@ public class Room_Info_Activity extends AppCompatActivity {
                     detail_bundle.putInt("nights", nights);
                     detail_bundle.putInt("room_qty", room_qty);
                     detail_bundle.putDouble("rates", price);
+                    detail_bundle.putInt("stock", stocks);
                     //do extras arraylist
                     detail_bundle.putParcelableArrayList("extras",extrasArrayList);
                     intent.putExtras(detail_bundle);

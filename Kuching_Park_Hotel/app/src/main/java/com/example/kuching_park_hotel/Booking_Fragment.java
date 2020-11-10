@@ -31,7 +31,7 @@ public class Booking_Fragment extends Fragment {
     private RequestQueue requestQueue;
     private ArrayList<Room> rooms = new ArrayList<Room>();
     private MyAdapter myAdapter;
-    private static final String URL_DATA = "http://192.168.1.5/API/room_api.php";
+    private static final String URL_DATA = "http://103.6.196.63/~smdigitalcom/API/booking_history.php";
 
     public Booking_Fragment() {
         // Required empty public constructor

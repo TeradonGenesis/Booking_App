@@ -25,15 +25,14 @@ import java.util.Map;
 
 public class Booking_Detail_Activity extends AppCompatActivity {
 
-    private TextView textView_roomName, textView_duration, textView_nights, textView_unit, textView_subtotal, textView_total, textView_total_rooms_price;
+    private TextView textView_roomName, textView_duration, textView_nights, textView_unit, textView_subtotal, textView_total, textView_total_rooms_price, textView_norooms;;
     private EditText editText_customer_name, editText_customer_phone, editText_customer_email, editText_norooms;
     private Button btn_confirm, btn_cancel;
     private ImageButton imgBtn_up, imgBtn_down;
-    private int room_no = 1, difference, room_qty = 1;
+    private int cur_stock, difference, room_qty = 1;
     private String  room_id, name, checkin, checkout, unit_string, price_string;
     private Double price = 0.00, total_price = 0.00,sum_total = 0.00;
     private RequestQueue requestQueue;
-    private HashMap<Double, Integer> rates_map = new HashMap<>();
     //do hashmap for extras
     private ArrayList<Extra> extrasArrayList;
 
@@ -57,16 +56,18 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         textView_subtotal = findViewById(R.id.textView_subtotal);
         textView_total = findViewById(R.id.textView_total_price);
         textView_total_rooms_price = findViewById(R.id.textView_total_rooms_price);
-        editText_norooms = findViewById(R.id.editText_norooms);
+        textView_norooms = findViewById(R.id.textView_norooms);
         btn_confirm = findViewById(R.id.button_confirm);
         btn_cancel = findViewById(R.id.button_cancel);
-        /*
+
         imgBtn_up =findViewById(R.id.imageButton_up);
         imgBtn_down = findViewById(R.id.imageButton_down);
+        /*
         editText_customer_name = findViewById(R.id.editText_full_name);
         editText_customer_phone = findViewById(R.id.editText_booking_phone);
         editText_customer_email = findViewById(R.id.editText_booking_email);
          */
+
     }
 
     //Function to receive data from activity
@@ -78,8 +79,8 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         checkin = room_data.getString("check_in");
         checkout = room_data.getString("check_out");
         difference = room_data.getInt("nights");
-        room_qty = room_data.getInt("room_qty");
         total_price = room_data.getDouble("rates");
+        cur_stock = room_data.getInt("stock");
         //do extras version
         extrasArrayList = room_data.getParcelableArrayList("extras");
 /*
@@ -108,17 +109,19 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         textView_total.setText(total_summary);
         textView_unit.setText(unit.toString());
         textView_subtotal.setText(subtotal.toString());
-        editText_norooms.setText(String.valueOf(room_qty));
+        textView_norooms.setText(String.valueOf(room_qty));
     }
 
     //Function to connect click events to the buttons
     public void clickEvents() {
         btn_confirm.setOnClickListener(new Click());
         btn_cancel.setOnClickListener(new Click());
+        imgBtn_up.setOnClickListener(new Click());
+        imgBtn_down.setOnClickListener(new Click());
     }
 
     //Function to perform a POST function
-    public void postEnquiry() {
+    public void postBooking() {
         String url = "http://10.0.2.2/connections/android/post_booking.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -151,18 +154,18 @@ public class Booking_Detail_Activity extends AppCompatActivity {
         requestQueue.add(MyStringRequest);
     }
 
-    /*
+
     public void updatePrice() {
 
-        total_price = price * difference * room_no;
-        unit_string = "RM " + String.format("%.2f", price) + "x" + difference + "nights" + "x" + room_no;
+        total_price = price * room_qty;
+        unit_string = "RM " + String.format("%.2f", price)  + "x" + room_qty;
         price_string = "RM " + String.format("%.2f", total_price);
 
         textView_unit.setText(unit_string);
         textView_subtotal.setText(price_string);
         textView_total.setText(price_string);
-        editText_norooms.setText(String.valueOf(room_no));
-    }*/
+        textView_norooms.setText(String.valueOf(room_qty));
+    }
 
     public void send_status(String message, String btn_message) {
         Intent intent = new Intent(Booking_Detail_Activity.this, Booking_Success.class);
@@ -182,20 +185,24 @@ public class Booking_Detail_Activity extends AppCompatActivity {
 
             int id = v.getId();
             switch (id) {
-                /*
+
                 case R.id.imageButton_up:
-                    room_no += 1;
-                    updatePrice();
+                    if(room_qty <= cur_stock){
+                        room_qty += 1;
+                        updatePrice();
+                    } else{
+                        Toast.makeText(Booking_Detail_Activity.this, "Max number of rooms reached", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.imageButton_down:
-                    if(room_no > 1) {
-                        room_no -= 1;
+                    if(room_qty > cur_stock) {
+                        room_qty -= 1;
                         updatePrice();
                     } else {
                         Toast.makeText(Booking_Detail_Activity.this, "Cannot be less than 1", Toast.LENGTH_SHORT).show();
                     }
                     break;
-                 */
+
 
                 case R.id.button_confirm:
 /*
@@ -223,7 +230,7 @@ public class Booking_Detail_Activity extends AppCompatActivity {
                     }
                     break;
                     */
-                    postEnquiry();
+                    postBooking();
 
                 case R.id.button_cancel:
                     Intent intent = new Intent(v.getContext(), MainActivity.class);
