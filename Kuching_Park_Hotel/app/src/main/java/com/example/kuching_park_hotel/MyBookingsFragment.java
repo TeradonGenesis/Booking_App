@@ -68,7 +68,7 @@ public class MyBookingsFragment extends Fragment {
     }
 
     public void getBookings() {
-        String url = "http://10.0.2.2/API/get_bookings.php";
+        String url = "http://103.6.196.63/~smdigitalcom/API/booking_history.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
