@@ -76,7 +76,7 @@ public class MyHistoryDetailsAdapter extends RecyclerView.Adapter<MyHistoryDetai
 
             String booking_id = "B00000" + details.getBooking_id();
             String booking_date = details.getBooking_date();
-            String room_qty = moredetails.getRoom_qty() + " rooms";
+            String room_qty = moredetails.getRoom_qty() + " room(s)";
             String total = "RM" + details.getTotal()+"0";
             String check_in = moredetails.getCheck_in();
             String check_out = moredetails.getCheck_out();

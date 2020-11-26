@@ -44,19 +44,14 @@ public class Booking_History_Detail_Activity extends AppCompatActivity {
 
     public void setText() {
 
-        String id = booking_id;
-        String name = room_name;
-        String qty = room_qty;
-        String in = check_in;
-        String out = check_out;
-        String price = total;
+
 
         textView_booking_id.setText(booking_id);
-        textView_room_qty.setText(qty);
+        textView_room_qty.setText(room_qty);
         textView_check_in.setText(check_in);
         textView_check_out.setText(check_out);
-        textView_room_name.setText(name);
-        textView_total = findViewById(R.id.textView_history_total);
+        textView_room_name.setText(room_name);
+        textView_total.setText(total);
     }
 
 }
