@@ -261,6 +261,7 @@ public class Search_Room_Activity extends AppCompatActivity {
                 } catch (JSONException e) {
 
                     e.printStackTrace();
+                    Log.wtf("Details",e);
                 }
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.

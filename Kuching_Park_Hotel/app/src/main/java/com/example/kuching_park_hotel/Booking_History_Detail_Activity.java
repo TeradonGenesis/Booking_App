@@ -9,9 +9,7 @@ import java.util.HashMap;
 
 public class Booking_History_Detail_Activity extends AppCompatActivity {
 
-    private int booking_id, room_id, guest_ref, room_qty;
-    private String check_in, check_out, room_name;
-    private float total;
+    private String check_in, check_out, room_name, booking_id, room_qty, total;
 
     private TextView textView_booking_id, textView_room_qty, textView_check_in, textView_check_out, textView_room_name, textView_total;
 
@@ -21,6 +19,7 @@ public class Booking_History_Detail_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_booking__history__detail_);
         getBundle();
         init();
+        setText();
     }
 
     public void init() {
@@ -35,29 +34,28 @@ public class Booking_History_Detail_Activity extends AppCompatActivity {
     //Function to receive data from activity
     public void getBundle() {
         Bundle history = getIntent().getExtras();
-        booking_id = history.getInt("booking_id");
-        room_id = history.getInt("room_id");
-        guest_ref = history.getInt("guest_ref");
-        room_qty = history.getInt("room_qty");
+        booking_id = history.getString("booking_id");
+        room_qty = history.getString("room_qty");
         check_in = history.getString("check_in");
         check_out = history.getString("check_out");
         room_name = history.getString("room_name");
-        total = history.getFloat("total");
+        total = history.getString("total");
     }
 
     public void setText() {
 
-        String id = "Booking ID: " + booking_id;
-        String name = "Room: " + room_name;
-        String qty = "Qty: " + room_qty + " rooms";
-        String in = "Check In: " + check_in;
-        String out = "Check out: " + check_out;
-        String total = "Total: ";
+        String id = booking_id;
+        String name = room_name;
+        String qty = room_qty;
+        String in = check_in;
+        String out = check_out;
+        String price = total;
 
-        textView_room_qty = findViewById(R.id.textView_history_room_qty);
-        textView_check_in = findViewById(R.id.textView_history_check_in);
-        textView_check_out = findViewById(R.id.textView_history_check_out);
-        textView_room_name = findViewById(R.id.textView_history_room_name);
+        textView_booking_id.setText(booking_id);
+        textView_room_qty.setText(qty);
+        textView_check_in.setText(check_in);
+        textView_check_out.setText(check_out);
+        textView_room_name.setText(name);
         textView_total = findViewById(R.id.textView_history_total);
     }
 

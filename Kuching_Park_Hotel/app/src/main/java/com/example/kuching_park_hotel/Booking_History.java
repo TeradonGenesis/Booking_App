@@ -1,6 +1,7 @@
 package com.example.kuching_park_hotel;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 /*
 * Assumptions:
@@ -15,19 +16,14 @@ import java.math.BigInteger;
 
 
 public class Booking_History {
-    private int booking_id,room_id,guest_ref,room_qty;
-    private String check_in,check_out;
-    private String room_name;
+    private int booking_id;
+    private String booking_date;
     private float total;
+    private ArrayList<Booking_History_Details> detailsArrayList = new ArrayList<>();
 
-    public Booking_History(int booking_id, int room_id, int guest_ref, int room_qty, String check_in, String check_out, String room_name, float total) {
+    public Booking_History(int booking_id, String booking_date, float total) {
         this.booking_id = booking_id;
-        this.room_id = room_id;
-        this.guest_ref = guest_ref;
-        this.room_qty = room_qty;
-        this.check_in = check_in;
-        this.check_out = check_out;
-        this.room_name = room_name;
+        this.booking_date = booking_date;
         this.total = total;
     }
 
@@ -35,31 +31,17 @@ public class Booking_History {
         return booking_id;
     }
 
-    public int getRoom_id() {
-        return room_id;
-    }
-
-    public int getGuest_ref() {
-        return guest_ref;
-    }
-
-    public int getRoom_qty() {
-        return room_qty;
-    }
-
-    public String getCheck_in() {
-        return check_in;
-    }
-
-    public String getCheck_out() {
-        return check_out;
-    }
-
-    public String getRoom_name() {
-        return room_name;
+    public String getBooking_date() {
+        return booking_date;
     }
 
     public float getTotal() {
         return total;
     }
+
+    public ArrayList<Booking_History_Details> getDetailsArrayList() {
+        return detailsArrayList;
+    }
+
+    public int getDetailsSize() {return detailsArrayList.size();}
 }

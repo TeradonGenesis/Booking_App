@@ -86,6 +86,8 @@ public class Login extends AppCompatActivity {
                     email_details = login_email.getText().toString();
                     email_password = login_password.getText().toString();
 
+                    Log.d("Login", email_details + email_password);
+
                     getData();
                 }
             });

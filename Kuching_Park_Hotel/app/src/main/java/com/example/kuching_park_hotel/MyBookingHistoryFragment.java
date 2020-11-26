@@ -28,16 +28,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MyBookingsFragment extends Fragment {
+public class MyBookingHistoryFragment extends Fragment {
 
     private String guest_id;
     private Member test_member;
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
     private ArrayList<Booking_History> bookingHistoryArrayList = new ArrayList<Booking_History>();
-    private MyBookingsAdapter myBookingsAdapter;
+    private MyBookingHistoryAdapter myBookingsAdapter;
 
-    public MyBookingsFragment(Member member) {
+    public MyBookingHistoryFragment(Member member) {
         test_member = member;
 
     }
@@ -68,7 +68,7 @@ public class MyBookingsFragment extends Fragment {
     }
 
     public void getBookings() {
-        String url = "http://10.0.2.2/API/get_bookings.php";
+        String url = "http://103.6.196.63/~smdigitalcom/API/booking_history.php";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -82,17 +82,32 @@ public class MyBookingsFragment extends Fragment {
 
                             JSONObject jo = array.getJSONObject(i);
 
-                            Booking_History booking = new Booking_History(jo.getInt("booking_id"), jo.getInt("room_id"), jo.getInt("guest_ref"), jo.getInt("room_qty"), jo.getString("check_in"), jo.getString("check_out"), jo.getString("room_name"), BigDecimal.valueOf(jo.getDouble("total")).floatValue());
+                            Booking_History booking = new Booking_History(jo.getInt("id"),
+                                    jo.getString("created"),
+                                    BigDecimal.valueOf(jo.getDouble("total")).floatValue());
+
+                            JSONArray detailsArray = jo.getJSONArray("Rooms");
+                            if(detailsArray.length() > 0) {
+                                for (int j = 0; j < detailsArray.length(); j++) {
+
+                                    JSONObject details = detailsArray.getJSONObject(j);
+                                    Booking_History_Details detailsItem = new Booking_History_Details(details.getInt("nights"), details.getInt("room_qty"),
+                                            details.getString("room_type_name"), details.getString("check_in"), details.getString("check_out"),
+                                            BigDecimal.valueOf(details.getDouble("price")).floatValue());
+                                    booking.getDetailsArrayList().add(detailsItem);
+                                }
+                            }
 
                             bookingHistoryArrayList.add(booking);
                         }
 
                         for (Booking_History booking : bookingHistoryArrayList){
-                            Log.i("Room: ", booking.getRoom_name());
+                            Log.i("Details: ", Integer.toString(booking.getBooking_id())+booking.getDetailsArrayList()+booking.getTotal());
                         }
 
-                        myBookingsAdapter = new MyBookingsAdapter(bookingHistoryArrayList);
+                        myBookingsAdapter = new MyBookingHistoryAdapter(bookingHistoryArrayList);
                         recyclerView.setAdapter(myBookingsAdapter);
+
 
                     } else {
                         Toast.makeText(getContext(), "No rooms available", Toast.LENGTH_SHORT).show();
@@ -101,6 +116,7 @@ public class MyBookingsFragment extends Fragment {
                 } catch (JSONException e) {
 
                     e.printStackTrace();
+                    Log.i("Details",e.toString());
                 }
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
